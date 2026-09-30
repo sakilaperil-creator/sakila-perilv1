@@ -1,0 +1,1293 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sakila per il Nepal — Insieme, apriamo porte</title>
+<meta name="description" content="Sakila per il Nepal: istruzione, salute e case sicure per le famiglie del Nepal.">
+<meta name="theme-color" content="#142A45">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://upload.wikimedia.org">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Mt._Annapurna_Sunrise.jpg/1920px-Mt._Annapurna_Sunrise.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Ccircle cx='24' cy='24' r='23' fill='%231E3A5F'/%3E%3Ccircle cx='30' cy='17' r='5' fill='%23E09A2B'/%3E%3Cpath d='M5 34 L16 20 L22 27 L29 17 L43 34 Z' fill='%23FBF7F0'/%3E%3C/svg%3E">
+<style>
+:root{
+  --paper:#FBF7F0; --surface:#FFFFFF; --ink:#1F2328; --ink-soft:#5A5F66;
+  --himalaya:#1E3A5F; --deep:#101F33; --marigold:#E09A2B; --gold:#F6C77A; --sindoor:#B5452F; --sindoor-dark:#963824;
+  --sage:#6E8B74; --line:#E7E0D3; --cream:#F4ECDD;
+  --serif:"Fraunces",Georgia,serif; --sans:"Inter",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  --wide:78rem; --pad:clamp(1.1rem,4vw,2.5rem); --section:clamp(5rem,11vw,9rem);
+  --ease:cubic-bezier(.2,.8,.2,1);
+  --shadow:0 1px 2px rgba(16,31,51,.06),0 12px 32px rgba(16,31,51,.10);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+body{background:var(--paper);color:var(--ink);font:400 1.0625rem/1.65 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body.loading{overflow:hidden}
+img{display:block;max-width:100%;height:auto}
+svg{display:block}
+a{color:inherit}
+button{font:inherit;cursor:pointer;color:inherit}
+:focus-visible{outline:3px solid var(--marigold);outline-offset:3px;border-radius:6px}
+::selection{background:var(--marigold);color:var(--deep)}
+.wrap{max-width:var(--wide);margin-inline:auto;padding-inline:var(--pad)}
+.skip{position:absolute;left:-999px;top:0;background:var(--himalaya);color:#fff;padding:.6rem 1rem;z-index:200}
+.skip:focus{left:1rem;top:1rem}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.05;color:var(--himalaya);letter-spacing:-.015em}
+h2{font-size:clamp(2.3rem,5.2vw,4.2rem)}
+h2 em,h1 em{font-style:italic;font-weight:300;color:var(--sindoor)}
+h3{font-size:1.45rem;line-height:1.15}
+.kicker{font:700 .76rem/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--sindoor);margin-bottom:1.1rem;display:inline-flex;align-items:center;gap:.7rem}
+.kicker::before{content:"";width:28px;height:2px;background:var(--marigold)}
+.lead{font-size:clamp(1.05rem,1.4vw,1.2rem);color:var(--ink-soft);max-width:36rem}
+
+/* Buttons */
+.btn{--bg:var(--sindoor);position:relative;display:inline-flex;align-items:center;justify-content:center;gap:.6rem;border:0;border-radius:999px;padding:1rem 1.75rem;font-weight:600;text-decoration:none;min-height:52px;overflow:hidden;isolation:isolate;transition:color .35s var(--ease),box-shadow .35s var(--ease)}
+.btn span,.btn svg{position:relative;z-index:1}
+.btn::before{content:"";position:absolute;inset:0;border-radius:inherit;background:var(--fill,var(--sindoor-dark));transform:translateY(101%);transition:transform .45s var(--ease);z-index:0}
+.btn:hover::before{transform:none}
+.btn-primary{background:var(--sindoor);color:#fff;box-shadow:0 10px 24px -8px rgba(181,69,47,.6)}
+.btn-ghost{color:#fff;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.65);--fill:#fff;background:rgba(255,255,255,.04);backdrop-filter:blur(6px)}
+.btn-ghost:hover{color:var(--deep)}
+.btn-outline{color:var(--himalaya);box-shadow:inset 0 0 0 1.5px var(--himalaya);--fill:var(--himalaya)}
+.btn-outline:hover{color:#fff}
+.arrow{transition:transform .35s var(--ease)}
+.btn:hover .arrow,.link:hover .arrow{transform:translateX(4px)}
+.link{display:inline-flex;align-items:center;gap:.4rem;font-weight:600;color:var(--sindoor);text-decoration:none;background:linear-gradient(currentColor,currentColor) 0 100%/0 1.5px no-repeat;transition:background-size .4s var(--ease)}
+.link:hover{background-size:100% 1.5px}
+
+/* Preloader */
+.loader{position:fixed;inset:0;z-index:300;background:var(--deep);color:#fff;display:grid;place-items:center}
+.loader-inner{display:grid;justify-items:center;gap:1.4rem}
+.loader svg{width:min(260px,60vw)}
+.loader path{fill:none;stroke:var(--gold);stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+.loader-name{font-family:var(--serif);font-size:clamp(1.6rem,4vw,2.2rem);overflow:hidden;display:flex;gap:.35em}
+.loader-name span{display:inline-block}
+.loader-count{font:500 .8rem var(--sans);letter-spacing:.3em;color:#9FB1C7}
+.no-js .loader,.reduced .loader{display:none}
+
+/* Progress + cursor */
+.progress-line{position:fixed;top:0;left:0;height:3px;width:100%;z-index:120;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,#2F6FB5 0 20%,#F5F2EA 20% 40%,#C8372D 40% 60%,#3C8D4E 60% 80%,#F2C230 80%)}
+.cursor{position:fixed;left:0;top:0;z-index:250;pointer-events:none;width:10px;height:10px;margin:-5px 0 0 -5px;border-radius:50%;background:var(--marigold);mix-blend-mode:normal;transition:width .3s var(--ease),height .3s var(--ease),margin .3s var(--ease),background .3s;display:none;align-items:center;justify-content:center;font:700 .7rem var(--sans);letter-spacing:.12em;color:var(--deep);text-transform:uppercase}
+.cursor.big{width:84px;height:84px;margin:-42px 0 0 -42px;background:rgba(246,199,122,.92)}
+.cursor.link-hover{width:44px;height:44px;margin:-22px 0 0 -22px;background:rgba(224,154,43,.25)}
+@media (pointer:fine){.cursor{display:flex}}
+
+/* Header */
+header.site{position:fixed;top:0;left:0;right:0;z-index:100;transition:transform .5s var(--ease),background .4s,box-shadow .4s,color .4s;color:#fff}
+header.site.solid{background:rgba(251,247,240,.9);backdrop-filter:saturate(1.5) blur(14px);box-shadow:0 1px 0 var(--line);color:var(--ink)}
+header.site.hide{transform:translateY(-110%)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:84px}
+.brand{display:flex;align-items:center;gap:.75rem;text-decoration:none}
+.brand-mark{width:44px;height:44px;flex:none}
+.brand-name{font-family:var(--serif);font-weight:700;font-size:1.3rem;line-height:1}
+.brand-name small{display:block;font:600 .64rem/1.5 var(--sans);letter-spacing:.2em;text-transform:uppercase;opacity:.75;margin-top:.25rem}
+.menu{display:flex;align-items:center;gap:2rem;list-style:none}
+.menu a{text-decoration:none;font-weight:500;font-size:.95rem;position:relative;padding:.4rem 0}
+.menu a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1.5px;background:var(--marigold);transform:scaleX(0);transform-origin:right;transition:transform .4s var(--ease)}
+.menu a:hover::after{transform:scaleX(1);transform-origin:left}
+.nav-right{display:flex;align-items:center;gap:.8rem}
+.lang{display:flex;border-radius:999px;padding:3px;background:rgba(255,255,255,.14);backdrop-filter:blur(8px);box-shadow:inset 0 0 0 1px rgba(255,255,255,.25)}
+header.solid .lang{background:var(--surface);box-shadow:inset 0 0 0 1px var(--line)}
+.lang button{border:0;background:transparent;padding:.35rem .75rem;border-radius:999px;font-size:.78rem;font-weight:700;min-height:34px;opacity:.75}
+.lang button[aria-pressed="true"]{background:var(--marigold);color:var(--deep);opacity:1}
+.burger{display:none;background:none;border:0;width:46px;height:46px;border-radius:12px}
+.burger span{display:block;width:24px;height:2px;background:currentColor;margin:5px auto;transition:.35s var(--ease)}
+.nav .btn{padding:.75rem 1.3rem;min-height:46px}
+
+/* Hero */
+.hero{position:relative;min-height:100svh;color:#fff;overflow:hidden;background:var(--deep);display:flex;align-items:flex-end}
+.hero-media{position:absolute;inset:-6% 0 0 0;will-change:transform}
+.hero-media img{width:100%;height:112%;object-fit:cover;object-position:55% 60%;animation:kenburns 26s ease-in-out infinite alternate}
+@keyframes kenburns{from{transform:scale(1.04)}to{transform:scale(1.16) translate(-1.5%,1%)}}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(16,31,51,.85) 0%,rgba(16,31,51,.45) 50%,rgba(16,31,51,.1) 80%),linear-gradient(180deg,rgba(16,31,51,.55) 0%,rgba(16,31,51,0) 30%,rgba(16,31,51,.1) 60%,rgba(16,31,51,.92) 100%);pointer-events:none}
+.hero-flags{position:absolute;top:86px;left:-2%;width:104%;height:clamp(70px,9vw,120px);z-index:1;pointer-events:none;opacity:.95}
+.hero-flags .f{transform-box:fill-box;transform-origin:50% 0;animation:flutter 3.2s ease-in-out infinite}
+@keyframes flutter{0%,100%{transform:rotate(-4deg) skewX(-3deg)}50%{transform:rotate(5deg) skewX(4deg)}}
+.hero-inner{position:relative;z-index:2;width:100%;padding-block:9rem clamp(3.5rem,8vw,6rem)}
+.hero .kicker{color:var(--gold)}
+.hero h1{color:#fff;font-size:clamp(2.9rem,7vw,6.2rem);font-weight:500;line-height:.98;max-width:14ch;letter-spacing:-.03em}
+.hero h1 em{color:var(--gold);font-weight:300}
+.line-mask{display:block;overflow:hidden;padding-bottom:.08em;margin-bottom:-.08em}
+.line-mask>span{display:inline-block}
+.hero-sub{font-size:clamp(1.05rem,1.6vw,1.25rem);max-width:34rem;margin:1.6rem 0 2.2rem;color:#DCE4EE}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:.9rem}
+.hero-side{position:absolute;right:var(--pad);bottom:clamp(3.5rem,8vw,6rem);z-index:2;display:grid;gap:.8rem;width:290px}
+.glass{background:rgba(255,255,255,.1);backdrop-filter:blur(14px) saturate(1.3);border:1px solid rgba(255,255,255,.22);border-radius:18px;padding:1rem 1.15rem;color:#E9EEF5;font-size:.86rem}
+.live{display:flex;gap:.8rem;align-items:center;min-height:68px}
+.live-dot{width:10px;height:10px;border-radius:50%;background:#3DDC84;flex:none;box-shadow:0 0 0 0 rgba(61,220,132,.6);animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 12px rgba(61,220,132,0)}100%{box-shadow:0 0 0 0 rgba(61,220,132,0)}}
+.live strong{color:#fff;font-weight:600}
+.live-text{transition:opacity .4s,transform .4s var(--ease)}
+.live-text.out{opacity:0;transform:translateY(8px)}
+.glass .big{font-family:var(--serif);font-size:1.9rem;color:#fff;line-height:1}
+.mini-bar{height:6px;background:rgba(255,255,255,.18);border-radius:9px;margin:.7rem 0 .4rem;overflow:hidden}
+.mini-bar i{display:block;height:100%;width:68%;background:linear-gradient(90deg,var(--gold),var(--marigold));border-radius:9px}
+.scroll-cue{position:absolute;left:50%;bottom:1.4rem;z-index:2;transform:translateX(-50%);display:grid;justify-items:center;gap:.5rem;font:600 .68rem var(--sans);letter-spacing:.25em;text-transform:uppercase;color:#C9D5E4}
+.scroll-cue i{width:1.5px;height:42px;background:linear-gradient(var(--gold),transparent);animation:cue 2.2s var(--ease) infinite;transform-origin:top}
+@keyframes cue{0%{transform:scaleY(0)}50%{transform:scaleY(1)}100%{transform:scaleY(1);opacity:0}}
+
+/* Marquee */
+.marquee{background:var(--deep);color:#fff;overflow:hidden;padding-block:1.6rem;border-top:1px solid rgba(255,255,255,.08)}
+.marquee-track{display:flex;width:max-content;gap:3rem;font-family:var(--serif);font-size:clamp(2rem,5vw,3.6rem);font-weight:300;line-height:1;white-space:nowrap}
+.marquee-track span{display:inline-flex;align-items:center;gap:3rem}
+.marquee-track .o{-webkit-text-stroke:1px rgba(246,199,122,.8);color:transparent;font-style:italic}
+.marquee-track svg{color:var(--marigold);width:.55em;height:.55em}
+
+/* Intro statement */
+.intro{padding-block:var(--section)}
+.intro-grid{display:grid;grid-template-columns:1.25fr 1fr;gap:clamp(2rem,6vw,6rem);align-items:center}
+.statement{font-family:var(--serif);font-size:clamp(1.7rem,3.4vw,2.9rem);line-height:1.22;color:var(--himalaya);font-weight:400;letter-spacing:-.01em}
+.statement .w{transition:none}
+.statement em{font-style:italic;color:var(--sindoor)}
+.intro-cta{margin-top:2.4rem;display:flex;gap:1rem;flex-wrap:wrap;align-items:center}
+.intro-photos{position:relative;height:clamp(420px,48vw,620px)}
+.ph{position:absolute;overflow:hidden;border-radius:20px;box-shadow:var(--shadow)}
+.ph img{width:100%;height:118%;object-fit:cover}
+.ph-a{inset:0 18% 22% 0}
+.ph-b{inset:45% 0 0 34%;border:8px solid var(--paper)}
+.stamp{position:absolute;left:-14px;bottom:8%;z-index:3;width:128px;height:128px}
+.stamp text{font:700 10px var(--sans);fill:var(--himalaya)}
+.stamp .spin{transform-origin:64px 64px;animation:spin 18s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Impact */
+.impact{background:var(--surface);padding-block:clamp(3.5rem,7vw,5.5rem);border-block:1px solid var(--line)}
+.impact-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem}
+.stat{display:grid;justify-items:center;text-align:center;gap:.9rem}
+.ring{position:relative;width:148px;height:148px}
+.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ring circle{fill:none;stroke-width:5}
+.ring .bg{stroke:var(--cream)}
+.ring .fg{stroke:url(#ringGrad);stroke-linecap:round;stroke-dasharray:440;stroke-dashoffset:440}
+.ring .num{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--serif);font-size:2.6rem;font-weight:600;color:var(--himalaya);font-variant-numeric:tabular-nums}
+.stat .lbl{color:var(--ink-soft);font-size:.95rem;max-width:14ch}
+
+/* Projects (horizontal) */
+.projects{padding-top:var(--section);overflow:hidden}
+.projects-head{display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;flex-wrap:wrap;margin-bottom:3rem}
+.h-wrap{padding-bottom:var(--section)}
+.h-track{display:flex;gap:1.8rem;padding-inline:var(--pad);width:max-content}
+.pcard{width:min(560px,82vw);flex:none;background:var(--surface);border-radius:24px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
+.pcard-img{position:relative;aspect-ratio:16/11;overflow:hidden}
+.pcard-img img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
+.pcard:hover .pcard-img img{transform:scale(1.07)}
+.tag{position:absolute;left:1.1rem;top:1.1rem;background:rgba(255,255,255,.94);color:var(--himalaya);font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.45rem .8rem;border-radius:999px}
+.status{position:absolute;right:1.1rem;top:1.1rem;background:rgba(16,31,51,.7);backdrop-filter:blur(6px);color:#fff;font-size:.74rem;font-weight:600;padding:.45rem .8rem;border-radius:999px;display:flex;gap:.45rem;align-items:center}
+.status::before{content:"";width:7px;height:7px;border-radius:50%;background:#3DDC84}
+.pcard-body{padding:1.7rem 1.8rem 1.9rem;display:grid;gap:.8rem}
+.pmeta{display:flex;gap:1.2rem;font-size:.84rem;color:var(--ink-soft);flex-wrap:wrap}
+.pmeta b{color:var(--ink);font-weight:600}
+.pcard-body h3{font-size:1.75rem}
+.pcard-body p{color:var(--ink-soft)}
+.pbar-top{display:flex;justify-content:space-between;font-size:.86rem;font-weight:600;margin-bottom:.5rem}
+.pbar-top span:last-child{color:var(--sage)}
+.pbar{height:9px;background:var(--cream);border-radius:99px;overflow:hidden}
+.pbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--marigold),var(--sindoor));border-radius:99px}
+.pcard.end{background:var(--himalaya);color:#fff;justify-content:center;padding:3rem;gap:1.4rem;width:min(420px,82vw)}
+.pcard.end h3{color:#fff;font-size:2.2rem}
+.pcard.end p{color:#C9D5E4}
+
+/* Parallax band */
+.band{position:relative;height:clamp(460px,80vh,760px);overflow:hidden;display:grid;place-items:center;text-align:center;color:#fff}
+.band img{position:absolute;inset:-15% 0;width:100%;height:130%;object-fit:cover}
+.band::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(16,31,51,.35),rgba(16,31,51,.75))}
+.band-text{position:relative;z-index:1;max-width:58rem;padding-inline:var(--pad)}
+.band-text p{font-family:var(--serif);font-size:clamp(2rem,5vw,4.2rem);font-weight:300;line-height:1.1;letter-spacing:-.02em}
+.band-text p em{color:var(--gold)}
+.band-text small{display:block;margin-top:1.4rem;font:600 .8rem var(--sans);letter-spacing:.2em;text-transform:uppercase;color:#DCE4EE}
+
+/* Story */
+.story{padding-block:var(--section);background:var(--himalaya);color:#fff;overflow:hidden}
+.story-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(2rem,6vw,6rem);align-items:center}
+.story-img{border-radius:28px;overflow:hidden;aspect-ratio:4/5;position:relative;clip-path:inset(0 0 0 0 round 28px)}
+.story-img img{width:100%;height:115%;object-fit:cover}
+.story-img figcaption{position:absolute;left:1rem;bottom:1rem;right:1rem;font-size:.8rem;color:#E9EEF5;background:rgba(16,31,51,.55);backdrop-filter:blur(6px);border-radius:12px;padding:.6rem .8rem}
+.story .kicker{color:var(--gold)}
+.quote-mark{font-family:var(--serif);font-size:7rem;line-height:.6;color:var(--marigold);height:.5em;display:block}
+.story blockquote{font-family:var(--serif);font-size:clamp(1.7rem,3.3vw,2.6rem);line-height:1.25;font-weight:300;font-style:italic;margin:1.4rem 0 1.8rem}
+.story cite{font-style:normal;color:#C9D5E4;display:flex;align-items:center;gap:.9rem;margin-bottom:2rem}
+.story cite i{width:44px;height:44px;border-radius:50%;background:var(--marigold);display:grid;place-items:center;font:700 1.1rem var(--serif);color:var(--deep);font-style:normal}
+.story cite b{color:#fff;display:block}
+.story p.body{color:#C9D5E4;max-width:34rem;margin-bottom:2.2rem}
+
+/* Journey */
+.journey{padding-block:var(--section)}
+.timeline{position:relative;margin-top:3.5rem;display:grid;gap:3.2rem}
+.timeline::before,.t-fill{content:"";position:absolute;left:50%;top:0;bottom:0;width:2px;background:var(--line);transform:translateX(-50%)}
+.t-fill{background:linear-gradient(var(--marigold),var(--sindoor));transform-origin:top;transform:translateX(-50%) scaleY(0)}
+.t-item{display:grid;grid-template-columns:1fr 64px 1fr;align-items:center;gap:1.5rem}
+.t-dot{width:18px;height:18px;border-radius:50%;background:var(--paper);border:3px solid var(--marigold);justify-self:center;position:relative;z-index:1}
+.t-year{font-family:var(--serif);font-size:clamp(2.4rem,5vw,3.6rem);font-weight:600;color:var(--sindoor);line-height:1}
+.t-card{background:var(--surface);border-radius:18px;box-shadow:var(--shadow);overflow:hidden;display:grid;grid-template-columns:130px 1fr}
+.t-card img{width:100%;height:100%;object-fit:cover;min-height:120px}
+.t-card div{padding:1.1rem 1.3rem}
+.t-card h3{font-size:1.2rem;margin-bottom:.3rem}
+.t-card p{font-size:.93rem;color:var(--ink-soft)}
+.t-item:nth-child(even) .t-year{order:3}
+.t-item:nth-child(even) .t-dot{order:2}
+.t-item:nth-child(even) .t-card{order:1}
+.t-item:nth-child(odd) .t-year{text-align:right}
+
+/* Gallery */
+.gallery{padding-bottom:var(--section)}
+.g-grid{columns:3 280px;column-gap:1.1rem;margin-top:3rem}
+.g-item{break-inside:avoid;margin-bottom:1.1rem;border-radius:16px;overflow:hidden;position:relative;display:block;width:100%;border:0;background:var(--cream);padding:0;cursor:zoom-in}
+.g-item img{width:100%;transition:transform 1s var(--ease),filter .6s}
+.g-item:hover img{transform:scale(1.06)}
+.g-item::after{content:attr(data-cap);position:absolute;left:0;right:0;bottom:0;padding:2.4rem 1rem .9rem;background:linear-gradient(transparent,rgba(16,31,51,.8));color:#fff;font-size:.86rem;text-align:left;opacity:0;transform:translateY(10px);transition:.45s var(--ease)}
+.g-item:hover::after,.g-item:focus-visible::after{opacity:1;transform:none}
+.lightbox{position:fixed;inset:0;z-index:260;background:rgba(10,18,30,.94);display:none;align-items:center;justify-content:center;padding:4vw}
+.lightbox.open{display:flex}
+.lightbox img{max-height:82vh;width:auto;max-width:100%;border-radius:12px;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.lightbox p{position:absolute;bottom:1.4rem;left:0;right:0;text-align:center;color:#C9D5E4;font-size:.9rem;padding-inline:4rem}
+.lb-btn{position:absolute;top:50%;transform:translateY(-50%);width:54px;height:54px;border-radius:50%;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.06);color:#fff;font-size:1.4rem}
+.lb-btn:hover{background:rgba(255,255,255,.16)}
+.lb-prev{left:1.2rem}.lb-next{right:1.2rem}
+.lb-close{position:absolute;top:1.2rem;right:1.2rem;width:48px;height:48px;border-radius:50%;border:0;background:rgba(255,255,255,.1);color:#fff;font-size:1.3rem}
+
+/* Donate */
+.donate{padding-block:var(--section);background:linear-gradient(180deg,var(--paper),var(--cream))}
+.gifts{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin:3rem 0}
+.gift{background:var(--surface);border:1.5px solid var(--line);border-radius:22px;padding:0;text-align:left;transition:transform .45s var(--ease),box-shadow .45s var(--ease),border-color .3s;overflow:hidden;display:flex;flex-direction:column}
+.gift-img{aspect-ratio:16/9;overflow:hidden}
+.gift-img img{width:100%;height:100%;object-fit:cover;transition:transform 1s var(--ease)}
+.gift:hover{transform:translateY(-6px);box-shadow:0 24px 48px -16px rgba(16,31,51,.25)}
+.gift:hover .gift-img img{transform:scale(1.08)}
+.gift.active{border-color:var(--marigold);box-shadow:0 0 0 4px rgba(224,154,43,.22),0 24px 48px -16px rgba(16,31,51,.25)}
+.gift-body{padding:1.4rem 1.5rem 1.6rem}
+.gift .amt{font-family:var(--serif);font-size:2.8rem;color:var(--sindoor);font-weight:600;line-height:1}
+.gift p{margin-top:.6rem;color:var(--ink-soft);font-size:.96rem}
+.donate-box{display:grid;grid-template-columns:1fr 1.15fr;background:var(--surface);border-radius:28px;box-shadow:0 30px 70px -30px rgba(16,31,51,.35);overflow:hidden}
+.donate-side{position:relative;color:#fff;padding:clamp(2rem,4vw,3.2rem);display:flex;flex-direction:column;gap:1.3rem;overflow:hidden;min-height:100%}
+.donate-side>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.donate-side::before{content:"";position:absolute;inset:0;background:linear-gradient(160deg,rgba(16,31,51,.92),rgba(30,58,95,.78));z-index:1}
+.donate-side>*:not(img){position:relative;z-index:2}
+.donate-side h3{color:#fff;font-size:1.9rem}
+.donate-side ul{list-style:none;display:grid;gap:.9rem}
+.donate-side li{display:flex;gap:.75rem;align-items:flex-start;color:#DCE4EE}
+.donate-side li svg{flex:none;margin-top:4px;color:var(--gold)}
+.trust{display:flex;gap:1.4rem;margin-top:auto;padding-top:1rem;border-top:1px solid rgba(255,255,255,.15);flex-wrap:wrap}
+.trust div{font-size:.8rem;color:#C9D5E4}
+.trust b{display:block;font-family:var(--serif);font-size:1.5rem;color:#fff}
+.donate-form{padding:clamp(1.8rem,4vw,3rem)}
+.tabs{position:relative;display:flex;background:var(--paper);padding:5px;border-radius:14px;margin-bottom:1.7rem;border:1px solid var(--line)}
+.tabs button{position:relative;z-index:1;flex:1;border:0;background:transparent;padding:.75rem .4rem;border-radius:10px;font-weight:600;font-size:.9rem;color:var(--ink-soft);min-height:46px;transition:color .3s}
+.tabs button[aria-selected="true"]{color:var(--himalaya)}
+.tab-ind{position:absolute;top:5px;bottom:5px;left:5px;border-radius:10px;background:var(--surface);box-shadow:0 2px 8px rgba(0,0,0,.08);transition:transform .45s var(--ease),width .45s var(--ease)}
+.panel[hidden]{display:none}
+.big-amount{font-family:var(--serif);font-size:clamp(3.2rem,6vw,4.4rem);font-weight:600;color:var(--himalaya);line-height:1;margin-bottom:1rem;font-variant-numeric:tabular-nums}
+.big-amount small{font-size:.4em;color:var(--ink-soft);font-weight:400;margin-left:.3rem}
+.amounts{display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem;margin-bottom:.8rem}
+.amounts button{border:1.5px solid var(--line);background:var(--surface);border-radius:12px;padding:.8rem 0;font-weight:700;font-size:1.05rem;color:var(--himalaya);min-height:50px;transition:.25s}
+.amounts button:hover{border-color:var(--himalaya)}
+.amounts button[aria-pressed="true"]{border-color:var(--sindoor);background:#FCEFEA;color:var(--sindoor)}
+.field{display:flex;align-items:center;border:1.5px solid var(--line);border-radius:12px;padding:0 1rem;margin-bottom:1.1rem;background:var(--surface);transition:border-color .2s}
+.field:focus-within{border-color:var(--himalaya)}
+.field span{color:var(--ink-soft);font-weight:600}
+.field input{border:0;outline:0;padding:.9rem .5rem;font:inherit;width:100%;background:transparent}
+.impact-note{display:flex;gap:.8rem;align-items:center;background:#F1F6F2;border-radius:12px;padding:.85rem 1rem;font-size:.92rem;color:#3F5A45;margin-bottom:1.2rem;min-height:3.4rem}
+.impact-note svg{flex:none;color:var(--sage)}
+.pay-row{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-top:.7rem}
+.pay-alt{background:#FFC439;color:#1F2328;--fill:#F2B72A}
+.secure{display:flex;gap:.4rem;align-items:center;justify-content:center;font-size:.8rem;color:var(--ink-soft);margin-top:1rem}
+.qr-wrap{display:grid;grid-template-columns:auto 1fr;gap:1.4rem;align-items:center}
+.qr{width:160px;height:160px;border-radius:14px;border:1px solid var(--line);padding:10px;background:#fff}
+.pill{font-size:.78rem;font-weight:700;padding:.3rem .75rem;border-radius:99px;display:inline-block;margin-right:.3rem}
+.pill.esewa{background:#E7F6E3;color:#2E7D32}.pill.khalti{background:#EFE7F7;color:#5C2D91}
+.iban{display:flex;justify-content:space-between;align-items:center;gap:1rem;background:var(--paper);border:1px dashed #D5CCBB;border-radius:12px;padding:1rem;font-family:ui-monospace,Menlo,monospace;font-size:.95rem;margin:.9rem 0;flex-wrap:wrap}
+.copy{border:0;background:var(--himalaya);color:#fff;border-radius:9px;padding:.55rem .95rem;font:600 .82rem var(--sans);min-height:40px}
+dl.bank{display:grid;grid-template-columns:auto 1fr;gap:.4rem 1rem;font-size:.93rem}
+dl.bank dt{color:var(--ink-soft)}
+
+/* Voices */
+.voices{padding-block:var(--section);overflow:hidden}
+.voice-stage{position:relative;max-width:52rem;margin:3rem auto 0;text-align:center;min-height:15rem}
+.voice{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity .8s var(--ease),transform .8s var(--ease),visibility .8s;transform:translateY(16px)}
+.voice.on{opacity:1;visibility:visible;transform:none;position:relative}
+.voice p{font-family:var(--serif);font-size:clamp(1.4rem,2.8vw,2rem);line-height:1.35;color:var(--himalaya);font-weight:400}
+.voice footer{margin-top:1.4rem;color:var(--ink-soft);font-size:.92rem}
+.voice footer b{color:var(--ink)}
+.dots{display:flex;gap:.6rem;justify-content:center;margin-top:2rem}
+.dots button{width:34px;height:4px;border-radius:9px;border:0;background:var(--line);padding:0;position:relative;overflow:hidden}
+.dots button[aria-current="true"] i{position:absolute;inset:0;background:var(--marigold);transform-origin:left;animation:fillbar 6s linear forwards}
+@keyframes fillbar{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+/* News */
+.news{padding-bottom:var(--section)}
+.news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6rem;margin-top:3rem}
+.ncard{text-decoration:none;display:flex;flex-direction:column;gap:1.1rem}
+.ncard-img{aspect-ratio:4/3;border-radius:18px;overflow:hidden;position:relative}
+.ncard-img img{width:100%;height:100%;object-fit:cover;transition:transform 1.1s var(--ease)}
+.ncard:hover .ncard-img img{transform:scale(1.07)}
+.ncard time{font-size:.78rem;font-weight:700;color:var(--sindoor);letter-spacing:.1em;text-transform:uppercase}
+.ncard h3{font-size:1.35rem;transition:color .3s}
+.ncard:hover h3{color:var(--sindoor)}
+.ncard p{color:var(--ink-soft);font-size:.95rem}
+.read{position:absolute;right:1rem;bottom:1rem;width:48px;height:48px;border-radius:50%;background:#fff;display:grid;place-items:center;transform:scale(0) rotate(-45deg);transition:transform .45s var(--ease);color:var(--himalaya)}
+.ncard:hover .read{transform:none}
+
+/* Partner / 5x1000 / newsletter */
+.duo{display:grid;grid-template-columns:1.1fr 1fr;gap:1.6rem;padding-bottom:var(--section)}
+.five{position:relative;overflow:hidden;background:var(--marigold);border-radius:28px;padding:clamp(2rem,4vw,3rem);color:var(--deep);display:grid;gap:1.2rem;align-content:start}
+.five .big{font-family:var(--serif);font-size:clamp(3.8rem,8vw,6.5rem);font-weight:700;line-height:.85;letter-spacing:-.03em}
+.five h3{color:var(--deep);font-size:1.6rem}
+.five .cf{display:inline-flex;gap:1rem;align-items:center;background:rgba(255,255,255,.55);border-radius:14px;padding:.8rem 1.1rem;font-family:ui-monospace,Menlo,monospace;font-weight:700;justify-self:start}
+.five .cf small{font:700 .7rem var(--sans);letter-spacing:.12em;text-transform:uppercase}
+.five-deco{position:absolute;right:-40px;bottom:-40px;width:220px;opacity:.18}
+.partner{position:relative;border-radius:28px;overflow:hidden;color:#fff;padding:clamp(2rem,4vw,3rem);display:grid;align-content:end;gap:1rem;min-height:380px}
+.partner img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
+.partner:hover img{transform:scale(1.05)}
+.partner::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(16,31,51,.1),rgba(16,31,51,.88));z-index:1}
+.partner>*:not(img){position:relative;z-index:2}
+.partner h3{color:#fff;font-size:1.9rem}
+.partner p{color:#DCE4EE}
+.partner .pl{display:flex;gap:.7rem;flex-wrap:wrap}
+.partner .pl span{background:rgba(255,255,255,.14);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.25);border-radius:99px;padding:.4rem .9rem;font-size:.84rem}
+.newsletter{background:var(--himalaya);border-radius:28px;padding:clamp(2rem,5vw,3.6rem);display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center;color:#fff;position:relative;overflow:hidden}
+.newsletter h2{color:#fff;font-size:clamp(1.9rem,3.6vw,2.8rem)}
+.newsletter .kicker{color:var(--gold)}
+.nl-form{display:flex;gap:.6rem;flex-wrap:wrap;position:relative;z-index:1}
+.nl-form input{flex:1;min-width:200px;border:1.5px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);color:#fff;border-radius:999px;padding:.9rem 1.3rem;font:inherit;min-height:52px}
+.nl-form input::placeholder{color:#9FB1C7}
+.nl-form small{flex-basis:100%;color:#9FB1C7;font-size:.8rem}
+.nl-deco{position:absolute;right:-60px;top:-60px;width:260px;opacity:.08;color:#fff}
+
+/* Footer */
+footer.site{background:var(--deep);color:#C9D5E4;position:relative;margin-top:var(--section)}
+footer.site .ridge{position:absolute;top:-47px;left:0;width:100%;height:48px;color:var(--deep)}
+.foot-big{font-family:var(--serif);font-size:clamp(3rem,10vw,9rem);font-weight:600;color:#fff;letter-spacing:-.04em;line-height:.9;padding-top:4.5rem;display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;flex-wrap:wrap}
+.foot-big em{color:var(--gold);font-weight:300}
+.foot-big .btn{font:600 1.05rem var(--sans);letter-spacing:0;margin-bottom:.8rem}
+.foot{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:2.5rem;padding-block:3.5rem 3rem;border-bottom:1px solid rgba(255,255,255,.1)}
+footer.site h4{color:#fff;font:700 .78rem var(--sans);letter-spacing:.18em;text-transform:uppercase;margin-bottom:1rem}
+footer.site ul{list-style:none;display:grid;gap:.6rem}
+footer.site a{text-decoration:none;color:#C9D5E4;transition:color .2s}
+footer.site a:hover{color:#fff}
+.socials{display:flex;gap:.6rem;margin-top:1.3rem}
+.socials a{width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.08);display:grid;place-items:center;transition:background .3s,transform .3s var(--ease)}
+.socials a:hover{background:var(--sindoor);transform:translateY(-3px)}
+.credits{padding-block:1.6rem;font-size:.74rem;color:#7F93AB;line-height:1.6}
+.credits a{color:#9FB1C7!important;text-decoration:underline!important}
+.legal{padding-block:1.4rem 2rem;font-size:.84rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,.1)}
+.legal b{color:var(--gold);font-weight:600}
+
+/* Floating */
+.chat{position:fixed;right:20px;bottom:20px;z-index:90;width:58px;height:58px;border-radius:50%;background:#25D366;color:#fff;display:grid;place-items:center;box-shadow:0 10px 30px rgba(0,0,0,.25);border:0;transition:transform .3s var(--ease)}
+.chat:hover{transform:scale(1.08) rotate(-6deg)}
+.demo-chip{position:fixed;left:16px;bottom:16px;z-index:90;background:rgba(16,31,51,.85);backdrop-filter:blur(8px);color:#E9EEF5;font-size:.72rem;padding:.45rem .8rem;border-radius:99px;border:1px solid rgba(255,255,255,.15)}
+.demo-chip b{color:var(--gold)}
+.toast{position:fixed;left:50%;bottom:24px;z-index:280;transform:translate(-50%,140%);opacity:0;visibility:hidden;background:var(--ink);color:#fff;padding:.95rem 1.35rem;border-radius:14px;font-size:.92rem;transition:transform .45s var(--ease),opacity .3s,visibility .45s;max-width:calc(100% - 32px);box-shadow:0 14px 40px rgba(0,0,0,.3)}
+.toast.show{transform:translate(-50%,0);opacity:1;visibility:visible}
+
+/* Responsive */
+@media (max-width:1080px){
+  .menu{position:fixed;inset:0;background:var(--deep);flex-direction:column;justify-content:center;gap:.4rem;padding:var(--pad);clip-path:circle(0 at calc(100% - 44px) 42px);transition:clip-path .7s var(--ease);visibility:hidden}
+  .menu.open{clip-path:circle(150% at calc(100% - 44px) 42px);visibility:visible}
+  .menu li a{display:block;font-family:var(--serif);font-size:clamp(2.2rem,8vw,3.2rem);color:#fff;padding:.3rem 0}
+  .burger{display:block;position:relative;z-index:2}
+  header.menu-open{color:#fff!important;background:transparent!important;box-shadow:none!important;backdrop-filter:none!important}
+  .burger[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .burger[aria-expanded="true"] span:nth-child(2){opacity:0}
+  .burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+  .hero-side{display:none}
+  .intro-grid,.story-grid,.donate-box,.newsletter,.duo{grid-template-columns:1fr}
+  .impact-grid{grid-template-columns:repeat(2,1fr);row-gap:2.5rem}
+  .news-grid{grid-template-columns:1fr 1fr}
+  .foot{grid-template-columns:1fr 1fr}
+  .story-img{aspect-ratio:4/3}
+}
+@media (max-width:760px){
+  .nav .btn-primary{display:none}
+  .h-track{flex-direction:column;width:auto}
+  .pcard,.pcard.end{width:100%}
+  .gifts,.news-grid{grid-template-columns:1fr}
+  .amounts{grid-template-columns:repeat(2,1fr)}
+  .pay-row{grid-template-columns:1fr}
+  .qr-wrap{grid-template-columns:1fr;justify-items:center;text-align:center}
+  .timeline::before,.t-fill{left:9px}
+  .t-item,.t-item:nth-child(even){grid-template-columns:18px 1fr;gap:.4rem 1.2rem}
+  .t-item .t-dot,.t-item:nth-child(even) .t-dot{order:0;grid-row:span 2}
+  .t-item .t-year,.t-item:nth-child(even) .t-year{order:1;text-align:left;font-size:2.2rem}
+  .t-item .t-card,.t-item:nth-child(even) .t-card{order:2;grid-template-columns:100px 1fr}
+  .foot{grid-template-columns:1fr}
+  .ring{width:124px;height:124px}
+  .ring .num{font-size:2.1rem}
+  .brand-name small{display:none}
+  .demo-chip{left:12px;bottom:12px;font-size:.66rem;padding:.35rem .65rem}
+  .demo-chip span{display:none}
+  .scroll-cue{display:none}
+  .hero-flags{top:78px}
+  .intro-photos{height:440px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .statement .w{opacity:1}
+}
+</style>
+</head>
+<body class="loading">
+<script>document.documentElement.classList.add('js');if(matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('reduced');document.body.classList.remove('loading')}</script>
+<a class="skip" href="#main" data-i18n="skip">Vai al contenuto</a>
+
+<!-- Preloader -->
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader-inner">
+    <svg viewBox="0 0 260 90"><path id="ridgePath" d="M4 82 L52 34 L78 58 L118 12 L150 48 L178 30 L214 66 L236 52 L256 82"/></svg>
+    <div class="loader-name"><span>Sakila</span><span style="font-style:italic;font-weight:300;color:var(--gold)">per il</span><span>Nepal</span></div>
+    <div class="loader-count"><span id="lcount">0</span>%</div>
+  </div>
+</div>
+
+<div class="progress-line" id="progress"></div>
+<div class="cursor" id="cursor"></div>
+
+<header class="site" id="header">
+  <div class="wrap nav">
+    <a class="brand" href="#top" aria-label="Sakila per il Nepal — home">
+      <svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="23" fill="#E09A2B"/><circle cx="31" cy="16" r="4.5" fill="#FBF7F0"/><path d="M5 34 L16 20 L22 27 L29 17 L43 34 Z" fill="#1E3A5F"/><path d="M12 38.5 Q24 42.5 36 38.5" stroke="#B5452F" stroke-width="2.6" fill="none" stroke-linecap="round"/></svg>
+      <span class="brand-name">Sakila<small>per il Nepal</small></span>
+    </a>
+    <nav aria-label="Principale">
+      <ul class="menu" id="menu">
+        <li><a href="#chi-siamo" data-i18n="nav.about">Chi siamo</a></li>
+        <li><a href="#progetti" data-i18n="nav.projects">Progetti</a></li>
+        <li><a href="#storie" data-i18n="nav.stories">Storie</a></li>
+        <li><a href="#galleria" data-i18n="nav.gallery">Galleria</a></li>
+        <li><a href="#notizie" data-i18n="nav.news">Notizie</a></li>
+      </ul>
+    </nav>
+    <div class="nav-right">
+      <div class="lang" role="group" aria-label="Lingua / Language">
+        <button type="button" data-lang="it" aria-pressed="true">IT</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+      <a class="btn btn-primary magnetic" href="#dona"><span data-i18n="cta.donate">Dona ora</span></a>
+      <button class="burger" aria-controls="menu" aria-expanded="false" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <!-- HERO -->
+  <section class="hero" id="top" aria-labelledby="hero-title">
+    <div class="hero-media" id="heroMedia">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Mt._Annapurna_Sunrise.jpg/1920px-Mt._Annapurna_Sunrise.jpg" alt="L'alba dorata sulla catena dell'Annapurna, Nepal" fetchpriority="high" width="1920" height="1277">
+    </div>
+    <svg class="hero-flags" viewBox="0 0 1440 160" preserveAspectRatio="none" aria-hidden="true">
+      <path id="rope" d="M0 30 Q360 120 720 60 T1440 90" fill="none" stroke="rgba(255,255,255,.45)" stroke-width="1.2"/>
+      <g id="flags"></g>
+    </svg>
+    <div class="wrap hero-inner">
+      <p class="kicker hero-kicker" data-i18n="hero.kicker">Associazione di solidarietà · Italia ↔ Nepal</p>
+      <h1 id="hero-title" data-i18n="hero.title" data-split>Insieme, apriamo porte alle <em>famiglie del Nepal.</em></h1>
+      <p class="hero-sub" data-i18n="hero.sub">Istruzione, salute e una casa sicura. Sosteniamo chi vive in difficoltà con trasparenza e rispetto, un passo alla volta.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary magnetic" href="#dona"><span data-i18n="cta.donate">Dona ora</span><svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+        <a class="btn btn-ghost magnetic" href="#progetti"><span data-i18n="cta.projects">Scopri i progetti</span></a>
+      </div>
+    </div>
+    <div class="hero-side">
+      <div class="glass live" aria-live="polite"><span class="live-dot"></span><span class="live-text" id="liveText"></span></div>
+      <div class="glass">
+        <div style="display:flex;justify-content:space-between;align-items:baseline"><span class="big">€ 6.800</span><span data-i18n="hero.goal">di € 10.000</span></div>
+        <div class="mini-bar"><i></i></div>
+        <span data-i18n="hero.campaign">Campagna “Una scuola per Sindhupalchok”</span>
+      </div>
+    </div>
+    <div class="scroll-cue" aria-hidden="true"><span data-i18n="scroll">Scorri</span><i></i></div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track" id="marquee"></div>
+  </div>
+
+  <!-- INTRO -->
+  <section class="intro" id="chi-siamo">
+    <div class="wrap intro-grid">
+      <div>
+        <p class="kicker reveal" data-i18n="intro.kicker">Chi siamo</p>
+        <p class="statement" id="statement" data-i18n="intro.statement">Crediamo che ogni famiglia meriti una scuola vicina, cure quando servono e un tetto sicuro sopra la testa. Dall'Italia al Nepal, trasformiamo la solidarietà in <em>opportunità concrete</em> — con le comunità, mai al posto loro.</p>
+        <div class="intro-cta reveal">
+          <a class="btn btn-outline magnetic" href="#storie"><span data-i18n="intro.cta">La nostra storia</span><svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+          <a class="link" href="#dona" data-i18n="intro.link">Leggi i rapporti annuali →</a>
+        </div>
+      </div>
+      <div class="intro-photos">
+        <div class="ph ph-a"><img data-speed="-8" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Beautiful_Balthali_Village.jpg/1920px-Beautiful_Balthali_Village.jpg" alt="Il villaggio di Balthali tra colline terrazzate" loading="lazy" width="1920" height="1263"></div>
+        <div class="ph ph-b"><img data-speed="10" src="https://upload.wikimedia.org/wikipedia/commons/0/0f/Smiling_Children_%283965280057%29.jpg" alt="Bambini nepalesi sorridenti" loading="lazy" width="1200" height="800"></div>
+        <svg class="stamp" viewBox="0 0 128 128" aria-hidden="true">
+          <circle cx="64" cy="64" r="62" fill="#F6C77A"/>
+          <defs><path id="circ" d="M64 64 m-46 0 a46 46 0 1 1 92 0 a46 46 0 1 1 -92 0"/></defs>
+          <g class="spin"><text textLength="286" lengthAdjust="spacing"><textPath href="#circ" textLength="286" lengthAdjust="spacing">DAL 2017 · ITALIA ↔ NEPAL · </textPath></text></g>
+          <path d="M40 76 L54 58 L62 67 L72 54 L88 76Z" fill="#1E3A5F"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- IMPACT -->
+  <section class="impact" aria-label="Impatto">
+    <svg width="0" height="0" style="position:absolute"><defs><linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E09A2B"/><stop offset="1" stop-color="#B5452F"/></linearGradient></defs></svg>
+    <div class="wrap impact-grid">
+      <div class="stat"><div class="ring"><svg viewBox="0 0 150 150"><circle class="bg" cx="75" cy="75" r="70"/><circle class="fg" cx="75" cy="75" r="70" data-p=".82"/></svg><span class="num" data-count="320" data-suffix="+">0</span></div><div class="lbl" data-i18n="stat.1">famiglie sostenute</div></div>
+      <div class="stat"><div class="ring"><svg viewBox="0 0 150 150"><circle class="bg" cx="75" cy="75" r="70"/><circle class="fg" cx="75" cy="75" r="70" data-p=".6"/></svg><span class="num" data-count="12">0</span></div><div class="lbl" data-i18n="stat.2">progetti attivi in 5 distretti</div></div>
+      <div class="stat"><div class="ring"><svg viewBox="0 0 150 150"><circle class="bg" cx="75" cy="75" r="70"/><circle class="fg" cx="75" cy="75" r="70" data-p=".7"/></svg><span class="num" data-count="85" data-suffix="+">0</span></div><div class="lbl" data-i18n="stat.3">bambini tornati a scuola</div></div>
+      <div class="stat"><div class="ring"><svg viewBox="0 0 150 150"><circle class="bg" cx="75" cy="75" r="70"/><circle class="fg" cx="75" cy="75" r="70" data-p=".94"/></svg><span class="num" data-count="94" data-suffix="%">0</span></div><div class="lbl" data-i18n="stat.4">dei fondi va direttamente ai progetti</div></div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="projects" id="progetti">
+    <div class="wrap projects-head">
+      <div>
+        <p class="kicker reveal" data-i18n="proj.kicker">Dove va il tuo aiuto</p>
+        <h2 class="reveal" data-i18n="proj.title">Progetti che <em>cambiano</em> la vita</h2>
+      </div>
+      <p class="lead reveal" data-i18n="proj.lead">Ogni progetto nasce ascoltando le comunità locali. Segui i progressi in tempo reale, passo dopo passo.</p>
+    </div>
+    <div class="h-wrap" id="hWrap">
+      <div class="h-track" id="hTrack">
+        <article class="pcard">
+          <div class="pcard-img"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Happy_to_be_back_in_school_%288424386762%29.jpg/960px-Happy_to_be_back_in_school_%288424386762%29.jpg" alt="Studenti in uniforme in un'aula in Nepal" loading="lazy" width="960" height="639"><span class="tag" data-i18n="p1.tag">Istruzione</span><span class="status" data-i18n="p.active">In corso</span></div>
+          <div class="pcard-body">
+            <div class="pmeta"><span>📍 <b>Sindhupalchok</b></span><span data-i18n="p1.m">86 studenti · dal 2024</span></div>
+            <h3 data-i18n="p1.t">Una scuola per il villaggio</h3>
+            <p data-i18n="p1.d">Aule antisismiche, una biblioteca e borse di studio per le bambine che rischiano di abbandonare la scuola.</p>
+            <div><div class="pbar-top"><span>€ 6.800 / € 10.000</span><span>68%</span></div><div class="pbar"><i data-w="68"></i></div></div>
+            <a class="link" href="#dona" data-i18n="p.support">Sostieni questo progetto →</a>
+          </div>
+        </article>
+        <article class="pcard">
+          <div class="pcard-img"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/District_Public_Health_Office%2C_Immunisation_Clinic%2C_Pokhara%2C_Nepal._%2810693221543%29.jpg/960px-District_Public_Health_Office%2C_Immunisation_Clinic%2C_Pokhara%2C_Nepal._%2810693221543%29.jpg" alt="Una clinica per le vaccinazioni a Pokhara" loading="lazy" width="960" height="640"><span class="tag" data-i18n="p2.tag">Salute</span><span class="status" data-i18n="p.active">In corso</span></div>
+          <div class="pcard-body">
+            <div class="pmeta"><span>📍 <b>Kaski</b></span><span data-i18n="p2.m">1.200 visite · 2025–26</span></div>
+            <h3 data-i18n="p2.t">Cure per mamme e bambini</h3>
+            <p data-i18n="p2.d">Vaccinazioni, visite prenatali e kit igienici portati nei villaggi più lontani dai presidi sanitari.</p>
+            <div><div class="pbar-top"><span>€ 3.150 / € 6.000</span><span>52%</span></div><div class="pbar"><i data-w="52"></i></div></div>
+            <a class="link" href="#dona" data-i18n="p.support">Sostieni questo progetto →</a>
+          </div>
+        </article>
+        <article class="pcard">
+          <div class="pcard-img"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Talking_about_use_of_wood_in_new_house.jpg/960px-Talking_about_use_of_wood_in_new_house.jpg" alt="Una famiglia e un tecnico discutono la costruzione di una nuova casa" loading="lazy" width="960" height="1440" style="object-position:50% 35%"><span class="tag" data-i18n="p3.tag">Casa & comunità</span><span class="status" data-i18n="p.active">In corso</span></div>
+          <div class="pcard-body">
+            <div class="pmeta"><span>📍 <b>Gorkha</b></span><span data-i18n="p3.m">14 case · 3 villaggi</span></div>
+            <h3 data-i18n="p3.t">Case sicure dopo il sisma</h3>
+            <p data-i18n="p3.d">Ricostruiamo abitazioni antisismiche insieme alle famiglie, usando materiali e manodopera locali.</p>
+            <div><div class="pbar-top"><span>€ 11.800 / € 14.000</span><span>84%</span></div><div class="pbar"><i data-w="84"></i></div></div>
+            <a class="link" href="#dona" data-i18n="p.support">Sostieni questo progetto →</a>
+          </div>
+        </article>
+        <article class="pcard">
+          <div class="pcard-img"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Terrace_Farming_in_Chamunda_VDC_of_Dailekh.jpg/960px-Terrace_Farming_in_Chamunda_VDC_of_Dailekh.jpg" alt="Campi terrazzati a Dailekh" loading="lazy" width="960" height="720"><span class="tag" data-i18n="p4.tag">Lavoro & donne</span><span class="status" data-i18n="p.new">Nuovo</span></div>
+          <div class="pcard-body">
+            <div class="pmeta"><span>📍 <b>Dailekh</b></span><span data-i18n="p4.m">40 donne · microcredito</span></div>
+            <h3 data-i18n="p4.t">Semi di indipendenza</h3>
+            <p data-i18n="p4.d">Formazione agricola e piccoli prestiti per cooperative di donne che coltivano e vendono i propri prodotti.</p>
+            <div><div class="pbar-top"><span>€ 1.900 / € 8.000</span><span>24%</span></div><div class="pbar"><i data-w="24"></i></div></div>
+            <a class="link" href="#dona" data-i18n="p.support">Sostieni questo progetto →</a>
+          </div>
+        </article>
+        <div class="pcard end">
+          <h3 data-i18n="pend.t">Ogni progetto inizia con qualcuno come te.</h3>
+          <p data-i18n="pend.d">Scegli dove far arrivare il tuo aiuto, oppure lascia che sia la comunità a decidere dove serve di più.</p>
+          <a class="btn btn-primary magnetic" href="#dona" style="justify-self:start"><span data-i18n="cta.donate">Dona ora</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARALLAX BAND -->
+  <section class="band" aria-label="Citazione">
+    <img data-speed="14" src="https://upload.wikimedia.org/wikipedia/commons/0/03/The_prayer_flags_perfecty_blends_with_the_mountains.jpg" alt="" loading="lazy" width="1920" height="1280">
+    <div class="band-text">
+      <p data-i18n="band.q">Dove finiscono le strade, <em>inizia il nostro lavoro.</em></p>
+      <small data-i18n="band.s">Raggiungiamo i villaggi che gli aiuti spesso dimenticano</small>
+    </div>
+  </section>
+
+  <!-- STORY -->
+  <section class="story" id="storie">
+    <div class="wrap story-grid">
+      <figure class="story-img" id="storyImg">
+        <img data-speed="-10" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/A_farmer%2C_his_house_and_his_field.jpg/1280px-A_farmer%2C_his_house_and_his_field.jpg" alt="Una casa rurale tra i campi di riso" loading="lazy" width="1280" height="720" style="object-position:40% 50%">
+        <figcaption data-i18n="story.fig">Una casa di famiglia tra i campi, distretto di Sindhupalchok</figcaption>
+      </figure>
+      <div>
+        <p class="kicker reveal" data-i18n="story.kicker">Una storia vera</p>
+        <span class="quote-mark reveal">“</span>
+        <blockquote class="reveal" data-i18n="story.q">Oggi mia figlia va a scuola ogni giorno. Sogna di diventare insegnante, come la maestra che l'ha accolta il primo giorno.</blockquote>
+        <cite class="reveal"><i>M</i><span data-i18n="story.c"><b>Maya</b>mamma di Asha, 9 anni · Sindhupalchok</span></cite>
+        <p class="body reveal" data-i18n="story.b">Dietro ogni numero c'è un volto. Raccontiamo le storie delle famiglie che incontriamo con il loro consenso, nel rispetto della loro dignità e privacy.</p>
+        <a class="btn btn-primary magnetic reveal" href="#dona"><span data-i18n="story.cta">Aiuta una famiglia come quella di Maya</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- JOURNEY -->
+  <section class="journey">
+    <div class="wrap">
+      <div style="text-align:center;max-width:44rem;margin-inline:auto">
+        <p class="kicker reveal" data-i18n="j.kicker">Il nostro cammino</p>
+        <h2 class="reveal" data-i18n="j.title">Da una cena tra amici a <em>12 progetti</em></h2>
+      </div>
+      <div class="timeline" id="timeline">
+        <span class="t-fill" id="tFill"></span>
+        <div class="t-item"><div class="t-year">2017</div><span class="t-dot"></span><div class="t-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Pilgrims_at_Boudhanath_01.jpg/960px-Pilgrims_at_Boudhanath_01.jpg" alt="" loading="lazy" width="960" height="640"><div><h3 data-i18n="j1.t">L'inizio</h3><p data-i18n="j1.d">Sakila e un gruppo di amici in Italia raccolgono i primi fondi per una famiglia di Kathmandu.</p></div></div></div>
+        <div class="t-item"><div class="t-year">2019</div><span class="t-dot"></span><div class="t-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/New_school_building_brings_hope_for_the_community_%288423294567%29.jpg/960px-New_school_building_brings_hope_for_the_community_%288423294567%29.jpg" alt="" loading="lazy" width="960" height="640"><div><h3 data-i18n="j2.t">La prima scuola</h3><p data-i18n="j2.d">Nasce l'associazione e con lei il primo progetto scolastico nel distretto di Sindhupalchok.</p></div></div></div>
+        <div class="t-item"><div class="t-year">2022</div><span class="t-dot"></span><div class="t-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Unnamed_mother_and_child_visit_the_temporary_Batulechaur_Health_Post_in_Pokhara%2C_Nepal_for_treatment_%2810686910263%29.jpg/960px-Unnamed_mother_and_child_visit_the_temporary_Batulechaur_Health_Post_in_Pokhara%2C_Nepal_for_treatment_%2810686910263%29.jpg" alt="" loading="lazy" width="960" height="640"><div><h3 data-i18n="j3.t">Salute per tutti</h3><p data-i18n="j3.d">Partono i campi medici mobili per mamme e bambini nelle zone rurali.</p></div></div></div>
+        <div class="t-item"><div class="t-year">2026</div><span class="t-dot"></span><div class="t-card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Sindhupalchok%2C_Nepal.jpg/960px-Sindhupalchok%2C_Nepal.jpg" alt="" loading="lazy" width="960" height="640"><div><h3 data-i18n="j4.t">Oggi</h3><p data-i18n="j4.d">12 progetti attivi, 320 famiglie sostenute e una rete di amici in tutta Italia.</p></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="gallery" id="galleria">
+    <div class="wrap">
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;flex-wrap:wrap">
+        <div><p class="kicker reveal" data-i18n="g.kicker">Galleria</p><h2 class="reveal" data-i18n="g.title">Il Nepal che <em>amiamo</em></h2></div>
+        <p class="lead reveal" data-i18n="g.lead">Momenti dai villaggi, dalle scuole e dalle montagne. Clicca per ingrandire.</p>
+      </div>
+      <div class="g-grid" id="gGrid"></div>
+    </div>
+  </section>
+
+  <!-- DONATE -->
+  <section class="donate" id="dona">
+    <div class="wrap">
+      <div style="max-width:46rem">
+        <p class="kicker reveal" data-i18n="gift.kicker">Il tuo dono in azione</p>
+        <h2 class="reveal" data-i18n="gift.title">Piccoli gesti, <em>grandi cambiamenti</em></h2>
+        <p class="lead reveal" style="margin-top:1.2rem" data-i18n="gift.lead">Scegli un importo e scopri cosa rende possibile. Ogni euro arriva dove serve, e ti diciamo esattamente come.</p>
+      </div>
+      <div class="gifts">
+        <button class="gift" data-amt="10" type="button">
+          <span class="gift-img"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Better_quality_learning_in_a_safe_environment_%288423292169%29.jpg/960px-Better_quality_learning_in_a_safe_environment_%288423292169%29.jpg" alt="" loading="lazy" width="960" height="658"></span>
+          <span class="gift-body"><span class="amt">€10</span><p data-i18n="g1">Quaderni, penne e uno zaino per un bambino, per tutto l'anno scolastico.</p></span>
+        </button>
+        <button class="gift" data-amt="25" type="button">
+          <span class="gift-img"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Unnamed_mother_and_child_visit_the_temporary_Batulechaur_Health_Post_in_Pokhara%2C_Nepal_for_treatment_%2810686910263%29.jpg/960px-Unnamed_mother_and_child_visit_the_temporary_Batulechaur_Health_Post_in_Pokhara%2C_Nepal_for_treatment_%2810686910263%29.jpg" alt="" loading="lazy" width="960" height="640"></span>
+          <span class="gift-body"><span class="amt">€25</span><p data-i18n="g2">Una visita medica completa e un kit igienico per una mamma e il suo bambino.</p></span>
+        </button>
+        <button class="gift" data-amt="50" type="button">
+          <span class="gift-img"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Talking_about_use_of_wood_in_new_house.jpg/960px-Talking_about_use_of_wood_in_new_house.jpg" alt="" loading="lazy" width="960" height="1440" style="object-position:50% 30%"></span>
+          <span class="gift-body"><span class="amt">€50</span><p data-i18n="g3">Materiali per rinforzare il tetto di una casa prima della stagione dei monsoni.</p></span>
+        </button>
+      </div>
+
+      <div class="donate-box reveal">
+        <aside class="donate-side">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/A_safe_environment_to_learn_%288424388480%29.jpg/960px-A_safe_environment_to_learn_%288424388480%29.jpg" alt="" loading="lazy" width="960" height="640">
+          <h3 data-i18n="d.why">Perché donare con noi</h3>
+          <ul>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg><span data-i18n="d.w1">Bilanci e rapporti pubblicati ogni anno</span></li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg><span data-i18n="d.w2">Progetti scelti insieme alle comunità locali</span></li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg><span data-i18n="d.w3">Pagamenti sicuri: carta, PayPal, eSewa o Khalti</span></li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg><span data-i18n="d.w4">Ricevuta via email e aggiornamenti dal progetto</span></li>
+          </ul>
+          <div class="trust"><div><b>94%</b><span data-i18n="d.t1">ai progetti</span></div><div><b>1.480</b><span data-i18n="d.t2">donatori</span></div><div><b>9</b><span data-i18n="d.t3">anni di impegno</span></div></div>
+        </aside>
+        <div class="donate-form">
+          <div class="tabs" role="tablist" aria-label="Metodo di donazione">
+            <span class="tab-ind" id="tabInd"></span>
+            <button role="tab" aria-selected="true" aria-controls="tab-eu" id="t-eu" data-i18n="tab.eu">Italia / Europa</button>
+            <button role="tab" aria-selected="false" aria-controls="tab-np" id="t-np" tabindex="-1" data-i18n="tab.np">Dal Nepal</button>
+            <button role="tab" aria-selected="false" aria-controls="tab-bank" id="t-bank" tabindex="-1" data-i18n="tab.bank">Bonifico</button>
+          </div>
+          <div class="panel" id="tab-eu" role="tabpanel" aria-labelledby="t-eu">
+            <div class="big-amount" aria-live="polite">€<span id="bigAmt">25</span><small data-i18n="d.once">una tantum</small></div>
+            <div class="amounts" role="group" aria-label="Importo">
+              <button type="button" data-a="10" aria-pressed="false">€10</button>
+              <button type="button" data-a="25" aria-pressed="true">€25</button>
+              <button type="button" data-a="50" aria-pressed="false">€50</button>
+              <button type="button" data-a="100" aria-pressed="false">€100</button>
+            </div>
+            <label class="field"><span>€</span><input id="custom" type="number" min="1" inputmode="numeric" data-i18n-ph="d.other" placeholder="Altro importo" aria-label="Altro importo"></label>
+            <p class="impact-note"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.4-9.3-9C1 8.6 3 5 6.6 5c2 0 3.4 1.1 4.4 2.5C12 6.1 13.4 5 15.4 5 19 5 21 8.6 19.3 12 17 16.6 12 21 12 21z"/></svg><span id="impactNote"></span></p>
+            <button class="btn btn-primary" style="width:100%" id="payCard" type="button"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg><span id="payLabel"></span></button>
+            <div class="pay-row">
+              <button class="btn pay-alt" type="button" data-toast="pp"><span><b>Pay</b><b style="color:#0070BA">Pal</b></span></button>
+              <button class="btn btn-outline" type="button" data-toast="gp"><span>Apple / Google Pay</span></button>
+            </div>
+            <p class="secure"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span data-i18n="d.secure">Pagamento sicuro · SSL · Stripe & PayPal</span></p>
+          </div>
+          <div class="panel" id="tab-np" role="tabpanel" aria-labelledby="t-np" hidden>
+            <div class="qr-wrap">
+              <canvas class="qr" id="qr" width="140" height="140" aria-label="QR code"></canvas>
+              <div>
+                <div style="margin-bottom:.8rem"><span class="pill esewa">eSewa</span><span class="pill khalti">Khalti</span></div>
+                <h3 style="font-size:1.35rem;margin-bottom:.45rem" data-i18n="np.t">Scansiona e dona in NPR</h3>
+                <p style="color:var(--ink-soft);font-size:.95rem" data-i18n="np.d">Apri eSewa o Khalti, scansiona il codice QR e inserisci l'importo. Grazie di cuore — धन्यवाद!</p>
+              </div>
+            </div>
+          </div>
+          <div class="panel" id="tab-bank" role="tabpanel" aria-labelledby="t-bank" hidden>
+            <p style="color:var(--ink-soft);font-size:.95rem" data-i18n="bank.d">Preferisci il bonifico? Usa questi dati e indica "Donazione" nella causale.</p>
+            <div class="iban"><span id="ibanTxt">IT60 X054 2811 1010 0000 0123 456</span><button class="copy" type="button" id="copyIban" data-i18n="bank.copy">Copia IBAN</button></div>
+            <dl class="bank">
+              <dt data-i18n="bank.h">Intestatario</dt><dd>Associazione Sakila per il Nepal</dd>
+              <dt>BIC</dt><dd>BPMOIT22XXX</dd>
+              <dt data-i18n="bank.c">Causale</dt><dd data-i18n="bank.cv">Donazione liberale</dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VOICES -->
+  <section class="voices" aria-labelledby="voices-t">
+    <div class="wrap">
+      <div style="text-align:center"><p class="kicker reveal" id="voices-t" data-i18n="v.kicker">Voci dei nostri sostenitori</p></div>
+      <div class="voice-stage" id="voices">
+        <blockquote class="voice on"><p data-i18n="v1">«Ho iniziato con una cena solidale da Sakila. Oggi ricevo le foto della scuola che abbiamo aiutato a costruire. È la donazione più concreta che abbia mai fatto.»</p><footer><b>Giulia R.</b> · <span data-i18n="v1f">donatrice da Milano</span></footer></blockquote>
+        <blockquote class="voice"><p data-i18n="v2">«Sono stato in Nepal come volontario per tre settimane. Ho visto con i miei occhi dove arrivano i fondi: ogni euro ha un nome e un volto.»</p><footer><b>Marco B.</b> · <span data-i18n="v2f">volontario da Bologna</span></footer></blockquote>
+        <blockquote class="voice"><p data-i18n="v3">«Come ristorante partner, organizziamo una serata al mese per il Nepal. I nostri clienti adorano sapere che la cena aiuta una famiglia.»</p><footer><b>Ristorante Da Sakila</b> · <span data-i18n="v3f">partner dal 2017</span></footer></blockquote>
+      </div>
+      <div class="dots" id="dots" role="group" aria-label="Testimonianze"></div>
+    </div>
+  </section>
+
+  <!-- NEWS -->
+  <section class="news" id="notizie">
+    <div class="wrap">
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;flex-wrap:wrap">
+        <div><p class="kicker reveal" data-i18n="news.kicker">Dal campo</p><h2 class="reveal" data-i18n="news.title">Ultime <em>notizie</em></h2></div>
+        <a class="btn btn-outline magnetic reveal" href="#notizie"><span data-i18n="news.all">Tutte le notizie</span><svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+      </div>
+      <div class="news-grid">
+        <a class="ncard reveal" href="#notizie"><div class="ncard-img"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/New_school_building_brings_hope_for_the_community_%288423294567%29.jpg/960px-New_school_building_brings_hope_for_the_community_%288423294567%29.jpg" alt="Il nuovo edificio scolastico" loading="lazy" width="960" height="640"><span class="read"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17L17 7M8 7h9v9"/></svg></span></div><time datetime="2026-09-12" data-i18n="n1.d">12 settembre 2026</time><h3 data-i18n="n1.t">Inaugurata la nuova ala della scuola di Sindhupalchok</h3><p data-i18n="n1.p">Tre aule antisismiche e una biblioteca con più di 600 libri in nepalese e inglese.</p></a>
+        <a class="ncard reveal" href="#notizie"><div class="ncard-img"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/District_Public_Health_Office%2C_Immunisation_Clinic%2C_Pokhara%2C_Nepal._%2810693221543%29.jpg/960px-District_Public_Health_Office%2C_Immunisation_Clinic%2C_Pokhara%2C_Nepal._%2810693221543%29.jpg" alt="Vaccinazioni in una clinica" loading="lazy" width="960" height="640"><span class="read"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17L17 7M8 7h9v9"/></svg></span></div><time datetime="2026-08-28" data-i18n="n2.d">28 agosto 2026</time><h3 data-i18n="n2.t">Campo medico: 140 visite in due giorni</h3><p data-i18n="n2.p">Medici volontari e personale locale insieme per vaccinazioni e controlli prenatali.</p></a>
+        <a class="ncard reveal" href="#notizie"><div class="ncard-img"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Prayer_flags_hung_by_the_stairs_leading_to_Swayambhunath_%2817850740075%29.jpg/960px-Prayer_flags_hung_by_the_stairs_leading_to_Swayambhunath_%2817850740075%29.jpg" alt="Bandiere di preghiera a Swayambhunath" loading="lazy" width="960" height="640"><span class="read"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17L17 7M8 7h9v9"/></svg></span></div><time datetime="2026-07-15" data-i18n="n3.d">15 luglio 2026</time><h3 data-i18n="n3.t">Cena solidale da Sakila: raccolti € 4.200</h3><p data-i18n="n3.p">Grazie a 120 ospiti, il ricavato finanzierà le borse di studio del prossimo anno.</p></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARTNER + 5x1000 -->
+  <section class="wrap duo">
+    <div class="partner reveal">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Pilgrims_at_Boudhanath_01.jpg/960px-Pilgrims_at_Boudhanath_01.jpg" alt="" loading="lazy" width="960" height="640">
+      <p class="kicker" style="color:var(--gold)" data-i18n="pa.kicker">Amici e partner</p>
+      <h3 data-i18n="pa.t">Aziende e ristoranti che scelgono il Nepal</h3>
+      <p data-i18n="pa.d">Dal Ristorante Da Sakila alle serate solidali: diventa partner e porta la tua comunità con noi.</p>
+      <div class="pl"><span>Ristorante Da Sakila</span><span data-i18n="pa.you">+ la tua azienda?</span></div>
+      <a class="link" href="#newsletter" style="color:var(--gold)" data-i18n="pa.cta">Diventa partner →</a>
+    </div>
+    <div class="five reveal">
+      <svg class="five-deco" viewBox="0 0 100 100" aria-hidden="true"><path d="M5 80 L30 45 L45 62 L62 35 L95 80Z" fill="currentColor"/></svg>
+      <div class="big">5×1000</div>
+      <h3 data-i18n="five.t">Dona il tuo 5×1000 a Sakila per il Nepal</h3>
+      <p data-i18n="five.d">Non ti costa nulla: basta una firma nella dichiarazione dei redditi e il nostro codice fiscale.</p>
+      <div class="cf"><small data-i18n="five.cf">Codice fiscale</small><span>97XXXXXXXXX</span></div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="wrap" id="newsletter">
+    <div class="newsletter reveal">
+      <svg class="nl-deco" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10 72 L35 40 L48 55 L64 32 L90 72Z" fill="currentColor"/></svg>
+      <div><p class="kicker" data-i18n="nl.kicker">Resta in contatto</p><h2 data-i18n="nl.t">Storie dal Nepal, <em style="color:var(--gold)">una volta al mese</em></h2></div>
+      <form class="nl-form" id="nlForm">
+        <label class="sr" for="nlEmail">Email</label>
+        <input id="nlEmail" type="email" required placeholder="nome@email.it" autocomplete="email">
+        <button class="btn btn-primary" type="submit"><span data-i18n="nl.btn">Iscriviti</span></button>
+        <small data-i18n="nl.small">Niente spam. Puoi cancellarti quando vuoi. Leggi la privacy policy.</small>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <svg class="ridge" viewBox="0 0 1440 48" preserveAspectRatio="none" aria-hidden="true"><path d="M0 48 L0 36 L120 22 L220 34 L360 8 L470 28 L600 14 L720 36 L860 4 L980 26 L1100 16 L1230 36 L1340 12 L1440 30 L1440 48Z" fill="currentColor"/></svg>
+  <div class="wrap">
+    <div class="foot-big"><span>Namaste <em>&amp;</em> Ciao.</span><a class="btn btn-primary magnetic" href="#dona"><span data-i18n="cta.donate">Dona ora</span></a></div>
+    <div class="foot">
+      <div>
+        <a class="brand" href="#top" style="color:#fff">
+          <svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="23" fill="#E09A2B"/><circle cx="31" cy="16" r="4.5" fill="#FBF7F0"/><path d="M5 34 L16 20 L22 27 L29 17 L43 34 Z" fill="#1E3A5F"/><path d="M12 38.5 Q24 42.5 36 38.5" stroke="#B5452F" stroke-width="2.6" fill="none" stroke-linecap="round"/></svg>
+          <span class="brand-name">Sakila<small>per il Nepal</small></span>
+        </a>
+        <p data-i18n="f.about" style="margin-top:1.1rem;font-size:.95rem">Un'associazione nata per aiutare le famiglie nepalesi in difficoltà, con il sostegno di amici in Italia e nel mondo.</p>
+        <div class="socials">
+          <a href="#" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v2H8v4h2v8h4v-8h3l1-4h-4V8z"/></svg></a>
+          <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+          <a href="#" aria-label="YouTube"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M22 8s-.2-1.6-.9-2.3c-.8-.9-1.8-.9-2.2-1C16 4.5 12 4.5 12 4.5s-4 0-6.9.2c-.4.1-1.4.1-2.2 1C2.2 6.4 2 8 2 8s-.2 1.9-.2 3.8v1.7c0 1.9.2 3.8.2 3.8s.2 1.6.9 2.3c.8.9 1.9.9 2.4 1 1.7.2 6.7.2 6.7.2s4 0 6.9-.2c.4-.1 1.4-.1 2.2-1 .7-.7.9-2.3.9-2.3s.2-1.9.2-3.8v-1.7C22.2 9.9 22 8 22 8zM10 15V9l5.2 3L10 15z"/></svg></a>
+        </div>
+      </div>
+      <div><h4 data-i18n="f.explore">Esplora</h4><ul><li><a href="#chi-siamo" data-i18n="nav.about">Chi siamo</a></li><li><a href="#progetti" data-i18n="nav.projects">Progetti</a></li><li><a href="#storie" data-i18n="nav.stories">Storie</a></li><li><a href="#galleria" data-i18n="nav.gallery">Galleria</a></li><li><a href="#dona" data-i18n="f.transp">Trasparenza</a></li></ul></div>
+      <div><h4 data-i18n="f.help">Aiutaci</h4><ul><li><a href="#dona" data-i18n="cta.donate">Dona ora</a></li><li><a href="#newsletter" data-i18n="f.vol">Diventa volontario</a></li><li><a href="#newsletter" data-i18n="f.partner">Diventa partner</a></li><li><a href="#dona">5×1000</a></li></ul></div>
+      <div><h4 data-i18n="f.contact">Contatti</h4><ul><li><a href="mailto:info@sakilaperilnepal.org">info@sakilaperilnepal.org</a></li><li>+39 02 1234 5678</li><li data-i18n="f.addr">Sede legale: Milano, Italia</li><li>C.F. 97XXXXXXXXX</li></ul></div>
+    </div>
+    <p class="credits"><span data-i18n="f.credits">Foto (dimostrative) da Wikimedia Commons:</span> Shedeur (CC BY-SA 4.0) · Sunil kawan (CC BY-SA 4.0) · Prashant Shrestha (CC BY 2.0) · UK DFID (CC BY 2.0) · Jim Holmes/AusAID &amp; DFAT (CC BY 2.0) · Bhawana Gurung (CC BY-SA 4.0) · Kuber Rana Magar (CC BY-SA 4.0) · Puskarr (CC BY-SA 4.0) · asoqpathak (CC BY-SA 4.0) · Bernard Gagnon (CC BY-SA 4.0) · YubarajKhatri1 (CC BY-SA 4.0) · Jorge Láscar (CC BY 2.0) · SkandalicznyOrzeszek (CC BY-SA 4.0). <a href="https://commons.wikimedia.org" target="_blank" rel="noopener">commons.wikimedia.org</a></p>
+    <div class="legal">
+      <span>© 2026 Sakila per il Nepal · <a href="#" data-i18n="f.privacy">Privacy</a> · <a href="#" data-i18n="f.cookie">Cookie</a></span>
+      <span data-i18n="f.made">Sito realizzato con ❤ da <b>Kivora Tech</b>, Bhaktapur</span>
+    </div>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Galleria">
+  <button class="lb-close" id="lbClose" aria-label="Chiudi">✕</button>
+  <button class="lb-btn lb-prev" id="lbPrev" aria-label="Precedente">‹</button>
+  <img id="lbImg" alt="">
+  <button class="lb-btn lb-next" id="lbNext" aria-label="Successiva">›</button>
+  <p id="lbCap"></p>
+</div>
+
+<span class="demo-chip"><b>DEMO</b> · <span data-i18n="demo">contenuti di esempio · Kivora Tech</span></span>
+<button class="chat magnetic" type="button" aria-label="WhatsApp" data-toast="wa"><svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.8.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.3 2.4.9 2.9.8 3.4.7.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3zM12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2z"/></svg></button>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+<script>
+/* ---------- Content ---------- */
+const W = "https://upload.wikimedia.org/wikipedia/commons/";
+const GALLERY = [
+  { src: W+"0/0f/Smiling_Children_%283965280057%29.jpg", it:"Sorrisi a Kathmandu", en:"Smiles in Kathmandu" },
+  { src: W+"thumb/a/af/Sindhupalchok%2C_Nepal.jpg/960px-Sindhupalchok%2C_Nepal.jpg", it:"Le colline di Sindhupalchok", en:"The hills of Sindhupalchok" },
+  { src: W+"thumb/1/1d/A_safe_environment_to_learn_%288424388480%29.jpg/960px-A_safe_environment_to_learn_%288424388480%29.jpg", it:"Una scuola che accoglie tutta la comunità", en:"A school that welcomes the whole community" },
+  { src: W+"thumb/5/58/Elderly_Woman_Resting_in_a_Himalayan_Village_Field.jpg/960px-Elderly_Woman_Resting_in_a_Himalayan_Village_Field.jpg", it:"Campi di montagna", en:"Mountain fields" },
+  { src: W+"thumb/7/78/Happy_to_be_back_in_school_%288424386762%29.jpg/960px-Happy_to_be_back_in_school_%288424386762%29.jpg", it:"Di nuovo in classe", en:"Back in the classroom" },
+  { src: W+"thumb/e/e7/Terrace_Farming_in_Chamunda_VDC_of_Dailekh.jpg/960px-Terrace_Farming_in_Chamunda_VDC_of_Dailekh.jpg", it:"Terrazze coltivate a Dailekh", en:"Terraced farms in Dailekh" },
+  { src: W+"thumb/1/1a/Prayer_flags_hung_by_the_stairs_leading_to_Swayambhunath_%2817850740075%29.jpg/960px-Prayer_flags_hung_by_the_stairs_leading_to_Swayambhunath_%2817850740075%29.jpg", it:"Bandiere di preghiera a Swayambhunath", en:"Prayer flags at Swayambhunath" },
+  { src: W+"thumb/d/de/Beautiful_Balthali_Village.jpg/960px-Beautiful_Balthali_Village.jpg", it:"Il villaggio di Balthali", en:"Balthali village" },
+  { src: W+"thumb/0/03/Pilgrims_at_Boudhanath_01.jpg/960px-Pilgrims_at_Boudhanath_01.jpg", it:"Boudhanath, Kathmandu", en:"Boudhanath, Kathmandu" },
+];
+const LIVE = {
+  it: [["Giulia","Milano",25],["Marco","Bologna",50],["Anita","Kathmandu","NPR 2.000"],["Luca","Torino",10],["Sara","Roma",100],["Pema","Pokhara","NPR 1.000"]],
+  en: [["Giulia","Milan",25],["Marco","Bologna",50],["Anita","Kathmandu","NPR 2,000"],["Luca","Turin",10],["Sara","Rome",100],["Pema","Pokhara","NPR 1,000"]]
+};
+const I18N = {
+  it: {
+    skip:"Vai al contenuto", demo:"contenuti di esempio · Kivora Tech",
+    "nav.about":"Chi siamo","nav.projects":"Progetti","nav.stories":"Storie","nav.gallery":"Galleria","nav.news":"Notizie",
+    "cta.donate":"Dona ora","cta.projects":"Scopri i progetti", scroll:"Scorri",
+    "hero.kicker":"Associazione di solidarietà · Italia ↔ Nepal",
+    "hero.title":"Insieme, apriamo porte alle <em>famiglie del Nepal.</em>",
+    "hero.sub":"Istruzione, salute e una casa sicura. Sosteniamo chi vive in difficoltà con trasparenza e rispetto, un passo alla volta.",
+    "hero.goal":"di € 10.000","hero.campaign":"Campagna “Una scuola per Sindhupalchok”",
+    live:(n,c,a)=>`<strong>${n}</strong> da ${c} ha donato <strong>${typeof a==="number"?"€"+a:a}</strong> · ${Math.floor(Math.random()*9)+1} min fa`,
+    marquee:["Istruzione","Salute","Casa","Dignità","Comunità","Speranza"],
+    "intro.kicker":"Chi siamo",
+    "intro.statement":"Crediamo che ogni famiglia meriti una scuola vicina, cure quando servono e un tetto sicuro sopra la testa. Dall'Italia al Nepal, trasformiamo la solidarietà in <em>opportunità concrete</em> — con le comunità, mai al posto loro.",
+    "intro.cta":"La nostra storia","intro.link":"Leggi i rapporti annuali →",
+    "stat.1":"famiglie sostenute","stat.2":"progetti attivi in 5 distretti","stat.3":"bambini tornati a scuola","stat.4":"dei fondi va direttamente ai progetti",
+    "proj.kicker":"Dove va il tuo aiuto","proj.title":"Progetti che <em>cambiano</em> la vita","proj.lead":"Ogni progetto nasce ascoltando le comunità locali. Segui i progressi in tempo reale, passo dopo passo.",
+    "p.active":"In corso","p.new":"Nuovo","p.support":"Sostieni questo progetto →",
+    "p1.tag":"Istruzione","p1.m":"86 studenti · dal 2024","p1.t":"Una scuola per il villaggio","p1.d":"Aule antisismiche, una biblioteca e borse di studio per le bambine che rischiano di abbandonare la scuola.",
+    "p2.tag":"Salute","p2.m":"1.200 visite · 2025–26","p2.t":"Cure per mamme e bambini","p2.d":"Vaccinazioni, visite prenatali e kit igienici portati nei villaggi più lontani dai presidi sanitari.",
+    "p3.tag":"Casa & comunità","p3.m":"14 case · 3 villaggi","p3.t":"Case sicure dopo il sisma","p3.d":"Ricostruiamo abitazioni antisismiche insieme alle famiglie, usando materiali e manodopera locali.",
+    "p4.tag":"Lavoro & donne","p4.m":"40 donne · microcredito","p4.t":"Semi di indipendenza","p4.d":"Formazione agricola e piccoli prestiti per cooperative di donne che coltivano e vendono i propri prodotti.",
+    "pend.t":"Ogni progetto inizia con qualcuno come te.","pend.d":"Scegli dove far arrivare il tuo aiuto, oppure lascia che sia la comunità a decidere dove serve di più.",
+    "band.q":"Dove finiscono le strade, <em>inizia il nostro lavoro.</em>","band.s":"Raggiungiamo i villaggi che gli aiuti spesso dimenticano",
+    "story.fig":"Una casa di famiglia tra i campi, distretto di Sindhupalchok","story.kicker":"Una storia vera",
+    "story.q":"Oggi mia figlia va a scuola ogni giorno. Sogna di diventare insegnante, come la maestra che l'ha accolta il primo giorno.",
+    "story.c":"<b>Maya</b>mamma di Asha, 9 anni · Sindhupalchok","story.b":"Dietro ogni numero c'è un volto. Raccontiamo le storie delle famiglie che incontriamo con il loro consenso, nel rispetto della loro dignità e privacy.","story.cta":"Aiuta una famiglia come quella di Maya",
+    "j.kicker":"Il nostro cammino","j.title":"Da una cena tra amici a <em>12 progetti</em>",
+    "j1.t":"L'inizio","j1.d":"Sakila e un gruppo di amici in Italia raccolgono i primi fondi per una famiglia di Kathmandu.",
+    "j2.t":"La prima scuola","j2.d":"Nasce l'associazione e con lei il primo progetto scolastico nel distretto di Sindhupalchok.",
+    "j3.t":"Salute per tutti","j3.d":"Partono i campi medici mobili per mamme e bambini nelle zone rurali.",
+    "j4.t":"Oggi","j4.d":"12 progetti attivi, 320 famiglie sostenute e una rete di amici in tutta Italia.",
+    "g.kicker":"Galleria","g.title":"Il Nepal che <em>amiamo</em>","g.lead":"Momenti dai villaggi, dalle scuole e dalle montagne. Clicca per ingrandire.",
+    "gift.kicker":"Il tuo dono in azione","gift.title":"Piccoli gesti, <em>grandi cambiamenti</em>","gift.lead":"Scegli un importo e scopri cosa rende possibile. Ogni euro arriva dove serve, e ti diciamo esattamente come.",
+    g1:"Quaderni, penne e uno zaino per un bambino, per tutto l'anno scolastico.",g2:"Una visita medica completa e un kit igienico per una mamma e il suo bambino.",g3:"Materiali per rinforzare il tetto di una casa prima della stagione dei monsoni.",
+    "d.why":"Perché donare con noi","d.w1":"Bilanci e rapporti pubblicati ogni anno","d.w2":"Progetti scelti insieme alle comunità locali","d.w3":"Pagamenti sicuri: carta, PayPal, eSewa o Khalti","d.w4":"Ricevuta via email e aggiornamenti dal progetto",
+    "d.t1":"ai progetti","d.t2":"donatori","d.t3":"anni di impegno",
+    "tab.eu":"Italia / Europa","tab.np":"Dal Nepal","tab.bank":"Bonifico","d.once":"una tantum","d.other":"Altro importo","d.secure":"Pagamento sicuro · SSL · Stripe & PayPal",
+    pay:"Dona €{a} con carta",
+    imp10:"€10 = quaderni, penne e uno zaino per un bambino per un anno.",imp25:"€25 = una visita medica e un kit igienico per mamma e bambino.",imp50:"€50 = materiali per rinforzare un tetto prima dei monsoni.",imp100:"€100 = un mese di lezioni per un'intera classe.",impX:"Grazie! Ogni euro sostiene i nostri progetti in Nepal.",
+    "np.t":"Scansiona e dona in NPR","np.d":"Apri eSewa o Khalti, scansiona il codice QR e inserisci l'importo. Grazie di cuore — धन्यवाद!",
+    "bank.d":"Preferisci il bonifico? Usa questi dati e indica \"Donazione\" nella causale.","bank.copy":"Copia IBAN","bank.h":"Intestatario","bank.c":"Causale","bank.cv":"Donazione liberale",
+    "v.kicker":"Voci dei nostri sostenitori",
+    v1:"«Ho iniziato con una cena solidale da Sakila. Oggi ricevo le foto della scuola che abbiamo aiutato a costruire. È la donazione più concreta che abbia mai fatto.»",v1f:"donatrice da Milano",
+    v2:"«Sono stato in Nepal come volontario per tre settimane. Ho visto con i miei occhi dove arrivano i fondi: ogni euro ha un nome e un volto.»",v2f:"volontario da Bologna",
+    v3:"«Come ristorante partner, organizziamo una serata al mese per il Nepal. I nostri clienti adorano sapere che la cena aiuta una famiglia.»",v3f:"partner dal 2017",
+    "news.kicker":"Dal campo","news.title":"Ultime <em>notizie</em>","news.all":"Tutte le notizie",
+    "n1.d":"12 settembre 2026","n1.t":"Inaugurata la nuova ala della scuola di Sindhupalchok","n1.p":"Tre aule antisismiche e una biblioteca con più di 600 libri in nepalese e inglese.",
+    "n2.d":"28 agosto 2026","n2.t":"Campo medico: 140 visite in due giorni","n2.p":"Medici volontari e personale locale insieme per vaccinazioni e controlli prenatali.",
+    "n3.d":"15 luglio 2026","n3.t":"Cena solidale da Sakila: raccolti € 4.200","n3.p":"Grazie a 120 ospiti, il ricavato finanzierà le borse di studio del prossimo anno.",
+    "pa.kicker":"Amici e partner","pa.t":"Aziende e ristoranti che scelgono il Nepal","pa.d":"Dal Ristorante Da Sakila alle serate solidali: diventa partner e porta la tua comunità con noi.","pa.you":"+ la tua azienda?","pa.cta":"Diventa partner →",
+    "five.t":"Dona il tuo 5×1000 a Sakila per il Nepal","five.d":"Non ti costa nulla: basta una firma nella dichiarazione dei redditi e il nostro codice fiscale.","five.cf":"Codice fiscale",
+    "nl.kicker":"Resta in contatto","nl.t":"Storie dal Nepal, <em style=\"color:var(--gold)\">una volta al mese</em>","nl.btn":"Iscriviti","nl.small":"Niente spam. Puoi cancellarti quando vuoi. Leggi la privacy policy.",
+    "f.about":"Un'associazione nata per aiutare le famiglie nepalesi in difficoltà, con il sostegno di amici in Italia e nel mondo.",
+    "f.explore":"Esplora","f.transp":"Trasparenza","f.help":"Aiutaci","f.vol":"Diventa volontario","f.partner":"Diventa partner","f.contact":"Contatti","f.addr":"Sede legale: Milano, Italia","f.privacy":"Privacy","f.cookie":"Cookie","f.credits":"Foto (dimostrative) da Wikimedia Commons:","f.made":"Sito realizzato con ❤ da <b>Kivora Tech</b>, Bhaktapur",
+    t_pay:"Grazie! Nel sito reale qui si apre il checkout sicuro Stripe.",t_pp:"Demo: qui si aprirà PayPal.",t_gp:"Demo: Apple Pay / Google Pay tramite Stripe.",t_wa:"Demo: apre una chat WhatsApp con l'associazione.",t_copy:"IBAN copiato!",t_nl:"Grazie! Controlla la tua email per confermare l'iscrizione."
+  },
+  en: {
+    skip:"Skip to content", demo:"sample content · Kivora Tech",
+    "nav.about":"About us","nav.projects":"Projects","nav.stories":"Stories","nav.gallery":"Gallery","nav.news":"News",
+    "cta.donate":"Donate now","cta.projects":"See our projects", scroll:"Scroll",
+    "hero.kicker":"Solidarity association · Italy ↔ Nepal",
+    "hero.title":"Together, we open doors for <em>families in Nepal.</em>",
+    "hero.sub":"Education, health and a safe home. We support people facing hardship with transparency and respect, one step at a time.",
+    "hero.goal":"of € 10,000","hero.campaign":"Campaign “A school for Sindhupalchok”",
+    live:(n,c,a)=>`<strong>${n}</strong> from ${c} donated <strong>${typeof a==="number"?"€"+a:a}</strong> · ${Math.floor(Math.random()*9)+1} min ago`,
+    marquee:["Education","Health","Home","Dignity","Community","Hope"],
+    "intro.kicker":"About us",
+    "intro.statement":"We believe every family deserves a school nearby, care when it's needed and a safe roof overhead. From Italy to Nepal, we turn solidarity into <em>real opportunities</em> — with communities, never in their place.",
+    "intro.cta":"Our story","intro.link":"Read our annual reports →",
+    "stat.1":"families supported","stat.2":"active projects in 5 districts","stat.3":"children back in school","stat.4":"of funds go straight to projects",
+    "proj.kicker":"Where your help goes","proj.title":"Projects that <em>change</em> lives","proj.lead":"Every project starts by listening to local communities. Follow the progress live, step by step.",
+    "p.active":"Ongoing","p.new":"New","p.support":"Support this project →",
+    "p1.tag":"Education","p1.m":"86 students · since 2024","p1.t":"A school for the village","p1.d":"Earthquake-safe classrooms, a library and scholarships for girls at risk of dropping out.",
+    "p2.tag":"Health","p2.m":"1,200 check-ups · 2025–26","p2.t":"Care for mothers and children","p2.d":"Vaccines, prenatal check-ups and hygiene kits brought to villages far from any clinic.",
+    "p3.tag":"Home & community","p3.m":"14 homes · 3 villages","p3.t":"Safe homes after the earthquake","p3.d":"Rebuilding earthquake-resistant homes with families, using local materials and labour.",
+    "p4.tag":"Work & women","p4.m":"40 women · microcredit","p4.t":"Seeds of independence","p4.d":"Farming training and small loans for women's cooperatives that grow and sell their own produce.",
+    "pend.t":"Every project starts with someone like you.","pend.d":"Choose where your help goes, or let the community decide where it's needed most.",
+    "band.q":"Where the roads end, <em>our work begins.</em>","band.s":"We reach the villages that aid often forgets",
+    "story.fig":"A family home among the fields, Sindhupalchok district","story.kicker":"A true story",
+    "story.q":"Today my daughter goes to school every day. She dreams of becoming a teacher, like the one who welcomed her on her first day.",
+    "story.c":"<b>Maya</b>mother of Asha, 9 · Sindhupalchok","story.b":"Behind every number is a face. We share the stories of the families we meet with their consent, respecting their dignity and privacy.","story.cta":"Help a family like Maya's",
+    "j.kicker":"Our journey","j.title":"From a dinner with friends to <em>12 projects</em>",
+    "j1.t":"The beginning","j1.d":"Sakila and a group of friends in Italy raise the first funds for a family in Kathmandu.",
+    "j2.t":"The first school","j2.d":"The association is founded, together with its first school project in Sindhupalchok.",
+    "j3.t":"Health for all","j3.d":"Mobile medical camps for mothers and children begin in rural areas.",
+    "j4.t":"Today","j4.d":"12 active projects, 320 families supported and a network of friends across Italy.",
+    "g.kicker":"Gallery","g.title":"The Nepal we <em>love</em>","g.lead":"Moments from villages, schools and mountains. Click to enlarge.",
+    "gift.kicker":"Your gift in action","gift.title":"Small gestures, <em>big changes</em>","gift.lead":"Choose an amount and see what it makes possible. Every euro goes where it's needed, and we tell you exactly how.",
+    g1:"Notebooks, pens and a school bag for one child, for a whole school year.",g2:"A full medical check-up and a hygiene kit for a mother and her baby.",g3:"Materials to strengthen a family's roof before the monsoon season.",
+    "d.why":"Why give with us","d.w1":"Accounts and reports published every year","d.w2":"Projects chosen together with local communities","d.w3":"Secure payment: card, PayPal, eSewa or Khalti","d.w4":"Email receipt and updates from the project",
+    "d.t1":"to projects","d.t2":"donors","d.t3":"years of commitment",
+    "tab.eu":"Italy / Europe","tab.np":"From Nepal","tab.bank":"Bank transfer","d.once":"one-time","d.other":"Other amount","d.secure":"Secure payment · SSL · Stripe & PayPal",
+    pay:"Donate €{a} by card",
+    imp10:"€10 = notebooks, pens and a school bag for one child for a year.",imp25:"€25 = a medical check-up and a hygiene kit for mother and baby.",imp50:"€50 = materials to strengthen a roof before the monsoon.",imp100:"€100 = a month of lessons for a whole class.",impX:"Thank you! Every euro supports our projects in Nepal.",
+    "np.t":"Scan and give in NPR","np.d":"Open eSewa or Khalti, scan the QR code and enter your amount. Thank you — धन्यवाद!",
+    "bank.d":"Prefer a bank transfer? Use these details and write \"Donation\" as the reference.","bank.copy":"Copy IBAN","bank.h":"Account holder","bank.c":"Reference","bank.cv":"Donation",
+    "v.kicker":"Voices of our supporters",
+    v1:"“I started with a charity dinner at Sakila. Now I receive photos of the school we helped build. It's the most tangible donation I've ever made.”",v1f:"donor from Milan",
+    v2:"“I volunteered in Nepal for three weeks. I saw with my own eyes where the money goes: every euro has a name and a face.”",v2f:"volunteer from Bologna",
+    v3:"“As a partner restaurant, we host one evening a month for Nepal. Our guests love knowing their dinner helps a family.”",v3f:"partner since 2017",
+    "news.kicker":"From the field","news.title":"Latest <em>news</em>","news.all":"All news",
+    "n1.d":"12 September 2026","n1.t":"New school wing opens in Sindhupalchok","n1.p":"Three earthquake-safe classrooms and a library with 600+ books in Nepali and English.",
+    "n2.d":"28 August 2026","n2.t":"Medical camp: 140 check-ups in two days","n2.p":"Volunteer doctors and local staff together for vaccines and prenatal care.",
+    "n3.d":"15 July 2026","n3.t":"Charity dinner at Sakila raises € 4,200","n3.p":"Thanks to 120 guests, the proceeds will fund next year's scholarships.",
+    "pa.kicker":"Friends & partners","pa.t":"Businesses and restaurants that choose Nepal","pa.d":"From Ristorante Da Sakila to charity evenings: become a partner and bring your community with you.","pa.you":"+ your business?","pa.cta":"Become a partner →",
+    "five.t":"Give your 5×1000 to Sakila per il Nepal","five.d":"It costs you nothing: just sign your Italian tax return and add our tax code.","five.cf":"Tax code",
+    "nl.kicker":"Stay in touch","nl.t":"Stories from Nepal, <em style=\"color:var(--gold)\">once a month</em>","nl.btn":"Subscribe","nl.small":"No spam. Unsubscribe anytime. Read our privacy policy.",
+    "f.about":"An association created to help Nepali families in hardship, supported by friends in Italy and around the world.",
+    "f.explore":"Explore","f.transp":"Transparency","f.help":"Help us","f.vol":"Volunteer","f.partner":"Become a partner","f.contact":"Contact","f.addr":"Registered office: Milan, Italy","f.privacy":"Privacy","f.cookie":"Cookies","f.credits":"Photos (demo only) from Wikimedia Commons:","f.made":"Website made with ❤ by <b>Kivora Tech</b>, Bhaktapur",
+    t_pay:"Thank you! On the real site, secure Stripe checkout opens here.",t_pp:"Demo: PayPal opens here.",t_gp:"Demo: Apple Pay / Google Pay via Stripe.",t_wa:"Demo: opens a WhatsApp chat with the association.",t_copy:"IBAN copied!",t_nl:"Thank you! Check your email to confirm your subscription."
+  }
+};
+
+/* ---------- Helpers ---------- */
+const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const hasGsap = !!(window.gsap && window.ScrollTrigger);
+let lang = "it", amount = 25, lenis = null;
+const tr = k => I18N[lang][k] ?? k;
+let toastT;
+function toast(m){ const t = $("#toast"); t.textContent = m; t.classList.add("show"); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove("show"), 3000); }
+
+/* ---------- i18n ---------- */
+function splitWords(el){
+  // wrap each word (keeping <em>) in spans for scrubbed reveal
+  const walk = (node, inEm) => {
+    let out = "";
+    node.childNodes.forEach(n => {
+      if (n.nodeType === 3) out += n.textContent.split(/(\s+)/).map(w => w.trim() ? `<span class="w">${w}</span>` : w).join("");
+      else if (n.nodeName === "EM") out += `<em>${walk(n, true)}</em>`;
+      else out += n.outerHTML;
+    });
+    return out;
+  };
+  el.innerHTML = walk(el);
+}
+function splitLines(el){
+  // hero title: wrap words in masks for a rising reveal
+  const walk = node => { let o = ""; node.childNodes.forEach(n => {
+    if (n.nodeType === 3) o += n.textContent.split(/(\s+)/).map(w => w.trim() ? `<span class="line-mask"><span>${w}</span></span>` : w).join("");
+    else if (n.nodeName === "EM") o += `<em>${walk(n)}</em>`; else o += n.outerHTML; }); return o; };
+  el.innerHTML = walk(el);
+  $$(".line-mask", el).forEach(m => m.style.display = "inline-block");
+}
+function applyLang(l, first){
+  lang = l; document.documentElement.lang = l;
+  $$("[data-i18n]").forEach(el => { const v = I18N[l][el.dataset.i18n]; if (typeof v === "string") el.innerHTML = v; });
+  $$("[data-i18n-ph]").forEach(el => el.placeholder = tr(el.dataset.i18nPh));
+  $$(".lang button").forEach(b => b.setAttribute("aria-pressed", b.dataset.lang === l));
+  splitLines($("#hero-title"));
+  splitWords($("#statement"));
+  buildMarquee(); buildGallery(); updateAmount(false);
+  if (!first && hasGsap){ setupStatement(); ScrollTrigger.refresh(); }
+}
+
+/* ---------- Marquee ---------- */
+const star = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.6H22l-6.2 4.5 2.4 7.6L12 17.2l-6.2 4.5 2.4-7.6L2 9.6h7.6z"/></svg>';
+function buildMarquee(){
+  const words = tr("marquee"); const chunk = words.map((w,i) => `<span class="${i%2?"o":""}">${w}${star}</span>`).join("");
+  $("#marquee").innerHTML = chunk + chunk + chunk;
+}
+
+/* ---------- Gallery + lightbox ---------- */
+let lbIndex = 0;
+function buildGallery(){
+  $("#gGrid").innerHTML = GALLERY.map((g,i) => `<button class="g-item" data-i="${i}" data-cap="${g[lang]}" data-cursor="${lang==="it"?"Apri":"Open"}"><img src="${g.src}" alt="${g[lang]}" loading="lazy"></button>`).join("");
+  $$(".g-item").forEach(b => b.addEventListener("click", () => openLb(+b.dataset.i)));
+}
+function openLb(i){ lbIndex = (i + GALLERY.length) % GALLERY.length; const g = GALLERY[lbIndex]; $("#lbImg").src = g.src; $("#lbImg").alt = g[lang]; $("#lbCap").textContent = g[lang]; $("#lightbox").classList.add("open"); lenis && lenis.stop(); $("#lbClose").focus(); }
+function closeLb(){ $("#lightbox").classList.remove("open"); lenis && lenis.start(); }
+$("#lbClose").onclick = closeLb; $("#lbPrev").onclick = () => openLb(lbIndex - 1); $("#lbNext").onclick = () => openLb(lbIndex + 1);
+$("#lightbox").addEventListener("click", e => { if (e.target.id === "lightbox") closeLb(); });
+addEventListener("keydown", e => { if (!$("#lightbox").classList.contains("open")) return; if (e.key === "Escape") closeLb(); if (e.key === "ArrowRight") openLb(lbIndex + 1); if (e.key === "ArrowLeft") openLb(lbIndex - 1); });
+
+/* ---------- Donation widget ---------- */
+function updateAmount(animate = true){
+  $("#payLabel").textContent = tr("pay").replace("{a}", amount || "…");
+  $("#impactNote").textContent = tr({10:"imp10",25:"imp25",50:"imp50",100:"imp100"}[amount] || "impX");
+  const el = $("#bigAmt");
+  if (animate && hasGsap && !reduce){ const o = { v: +el.textContent || 0 }; gsap.to(o, { v: amount, duration: .6, ease: "power3.out", onUpdate: () => el.textContent = Math.round(o.v) }); }
+  else el.textContent = amount;
+}
+function setAmount(a, fromCustom){
+  amount = a;
+  $$(".amounts button").forEach(b => b.setAttribute("aria-pressed", +b.dataset.a === a && !fromCustom));
+  $$(".gift").forEach(g => g.classList.toggle("active", +g.dataset.amt === a));
+  if (!fromCustom) $("#custom").value = "";
+  updateAmount();
+}
+$$(".amounts button").forEach(b => b.addEventListener("click", () => setAmount(+b.dataset.a)));
+$("#custom").addEventListener("input", e => setAmount(Math.max(0, parseInt(e.target.value) || 0), true));
+$$(".gift").forEach(g => g.addEventListener("click", () => {
+  selectTab("t-eu"); setAmount(+g.dataset.amt);
+  const target = $(".donate-box"); lenis ? lenis.scrollTo(target, { offset: -100 }) : target.scrollIntoView({ behavior: reduce ? "auto" : "smooth" });
+}));
+$("#payCard").addEventListener("click", e => {
+  toast(tr("t_pay"));
+  if (window.confetti && !reduce){ const r = e.currentTarget.getBoundingClientRect(); confetti({ particleCount: 140, spread: 80, startVelocity: 38, origin: { x: (r.left + r.width/2)/innerWidth, y: r.top/innerHeight }, colors: ["#E09A2B","#B5452F","#1E3A5F","#2F6FB5","#3C8D4E","#F2C230"] }); }
+});
+$$("[data-toast]").forEach(b => b.addEventListener("click", () => toast(tr("t_" + b.dataset.toast))));
+$("#copyIban").addEventListener("click", () => { try { navigator.clipboard.writeText($("#ibanTxt").textContent.replace(/\s/g,"")); } catch(e){} toast(tr("t_copy")); });
+$("#nlForm").addEventListener("submit", e => { e.preventDefault(); toast(tr("t_nl")); e.target.reset(); });
+
+/* Tabs with sliding indicator */
+const tabs = $$("[role=tab]");
+function moveInd(t){ const ind = $("#tabInd"); ind.style.width = t.offsetWidth + "px"; ind.style.transform = `translateX(${t.offsetLeft - 5}px)`; }
+function selectTab(id){ tabs.forEach(t => { const on = t.id === id; t.setAttribute("aria-selected", on); t.tabIndex = on ? 0 : -1; $("#" + t.getAttribute("aria-controls")).hidden = !on; if (on) moveInd(t); }); }
+tabs.forEach((t, i) => {
+  t.addEventListener("click", () => selectTab(t.id));
+  t.addEventListener("keydown", e => { if (!["ArrowRight","ArrowLeft"].includes(e.key)) return; const n = tabs[(i + (e.key === "ArrowRight" ? 1 : tabs.length - 1)) % tabs.length]; selectTab(n.id); n.focus(); });
+});
+addEventListener("resize", () => moveInd($("[role=tab][aria-selected=true]")));
+
+/* QR (demo pattern) */
+(function(){
+  const c = $("#qr"), x = c.getContext("2d"), n = 25, s = c.width / n; let seed = 11;
+  const rnd = () => (seed = (seed * 9301 + 49297) % 233280) / 233280;
+  x.fillStyle = "#fff"; x.fillRect(0,0,c.width,c.height); x.fillStyle = "#1F2328";
+  for (let i=0;i<n;i++) for (let j=0;j<n;j++) if (rnd() > .52) x.fillRect(i*s,j*s,s,s);
+  [[0,0],[n-7,0],[0,n-7]].forEach(([a,b]) => { x.fillStyle="#1F2328"; x.fillRect(a*s,b*s,7*s,7*s); x.fillStyle="#fff"; x.fillRect((a+1)*s,(b+1)*s,5*s,5*s); x.fillStyle="#1F2328"; x.fillRect((a+2)*s,(b+2)*s,3*s,3*s); });
+  x.fillStyle="#fff"; x.fillRect(10*s,10*s,5*s,5*s); x.fillStyle="#B5452F"; x.beginPath(); x.arc(12.5*s,12.5*s,2*s,0,7); x.fill();
+})();
+
+/* Prayer flags along the hero rope */
+(function(){
+  const rope = $("#rope"), g = $("#flags"), cols = ["#2F6FB5","#F5F2EA","#C8372D","#3C8D4E","#F2C230"], L = rope.getTotalLength(), n = 30;
+  for (let i=0;i<n;i++){
+    const p = rope.getPointAtLength((i+.5)/n*L);
+    const r = document.createElementNS("http://www.w3.org/2000/svg","path");
+    r.setAttribute("d", `M${p.x-16} ${p.y} h32 l-2 40 h-28 z`);
+    r.setAttribute("fill", cols[i%5]); r.setAttribute("opacity", ".88"); r.setAttribute("class","f");
+    r.style.animationDelay = (-(i*.23)%3.2) + "s"; r.style.animationDuration = (2.6 + (i%4)*.35) + "s";
+    g.appendChild(r);
+  }
+})();
+
+/* Live donations ticker */
+(function(){
+  let i = 0; const el = $("#liveText");
+  const show = () => { const d = LIVE[lang][i % LIVE[lang].length]; el.innerHTML = I18N[lang].live(...d); i++; };
+  show(); if (reduce) return;
+  setInterval(() => { el.classList.add("out"); setTimeout(() => { show(); el.classList.remove("out"); }, 400); }, 4200);
+})();
+
+/* Testimonials */
+(function(){
+  const vs = $$(".voice"), dots = $("#dots"); let cur = 0, timer;
+  vs.forEach((_, i) => { const b = document.createElement("button"); b.setAttribute("aria-label", `${i+1}`); b.innerHTML = "<i></i>"; b.onclick = () => go(i); dots.appendChild(b); });
+  function go(i){ cur = i; vs.forEach((v, j) => v.classList.toggle("on", j === i)); $$("button", dots).forEach((d, j) => { d.removeAttribute("aria-current"); if (j === i) { void d.offsetWidth; d.setAttribute("aria-current","true"); } }); clearTimeout(timer); if (!reduce) timer = setTimeout(() => go((cur + 1) % vs.length), 6000); }
+  go(0);
+})();
+
+/* Mobile menu */
+const burger = $(".burger"), menu = $("#menu"), header = $("#header");
+function setMenu(o){ burger.setAttribute("aria-expanded", o); menu.classList.toggle("open", o); header.classList.toggle("menu-open", o); o ? lenis?.stop() : lenis?.start(); }
+burger.addEventListener("click", () => setMenu(burger.getAttribute("aria-expanded") !== "true"));
+$$("#menu a").forEach(a => a.addEventListener("click", () => setMenu(false)));
+addEventListener("keydown", e => { if (e.key === "Escape" && menu.classList.contains("open")) { setMenu(false); burger.focus(); } });
+
+/* Anchor links through Lenis */
+$$('a[href^="#"]').forEach(a => a.addEventListener("click", e => {
+  const id = a.getAttribute("href"); if (id.length < 2) return; const t = $(id); if (!t) return;
+  if (lenis){ e.preventDefault(); lenis.scrollTo(t, { offset: id === "#top" ? 0 : -70, duration: 1.4 }); }
+}));
+
+/* Header: solid after hero, hide on scroll down */
+let lastY = 0;
+function onScroll(y){
+  header.classList.toggle("solid", y > innerHeight * .8);
+  if (!menu.classList.contains("open")) header.classList.toggle("hide", y > lastY && y > innerHeight);
+  lastY = y;
+  const h = document.documentElement.scrollHeight - innerHeight;
+  $("#progress").style.transform = `scaleX(${h > 0 ? y / h : 0})`;
+}
+addEventListener("scroll", () => onScroll(scrollY), { passive: true });
+
+/* Custom cursor + magnetic buttons (fine pointers only) */
+if (matchMedia("(pointer: fine)").matches && !reduce){
+  const c = $("#cursor"); let mx = 0, my = 0, cx = 0, cy = 0;
+  addEventListener("mousemove", e => { mx = e.clientX; my = e.clientY; });
+  (function loop(){ cx += (mx - cx) * .2; cy += (my - cy) * .2; c.style.transform = `translate(${cx}px,${cy}px)`; requestAnimationFrame(loop); })();
+  document.addEventListener("mouseover", e => {
+    const g = e.target.closest("[data-cursor]"); const l = e.target.closest("a,button,input");
+    c.classList.toggle("big", !!g); c.textContent = g ? g.dataset.cursor : ""; c.classList.toggle("link-hover", !g && !!l);
+  });
+  $$(".magnetic").forEach(b => {
+    b.addEventListener("mousemove", e => { const r = b.getBoundingClientRect(); b.style.transform = `translate(${(e.clientX - r.left - r.width/2) * .25}px,${(e.clientY - r.top - r.height/2) * .35}px)`; });
+    b.addEventListener("mouseleave", () => { b.style.transition = "transform .6s cubic-bezier(.2,.8,.2,1)"; b.style.transform = ""; setTimeout(() => b.style.transition = "", 600); });
+  });
+}
+
+/* ---------- Motion (GSAP) ---------- */
+let statementST;
+function setupStatement(){
+  if (!hasGsap || reduce) return;
+  statementST && statementST.kill();
+  const ws = $$("#statement .w");
+  statementST = gsap.fromTo(ws, { opacity: .14 }, { opacity: 1, stagger: .1, ease: "none", scrollTrigger: { trigger: "#statement", start: "top 78%", end: "bottom 45%", scrub: true } }).scrollTrigger;
+}
+function heroIntro(){
+  if (!hasGsap || reduce) return;
+  const tl = gsap.timeline({ defaults: { ease: "expo.out" } });
+  tl.from("#heroMedia", { scale: 1.3, duration: 2.4, ease: "power3.out" }, 0)
+    .from(".hero-kicker", { y: 20, opacity: 0, duration: 1 }, .3)
+    .from("#hero-title .line-mask > span", { yPercent: 115, rotate: 4, duration: 1.3, stagger: .06 }, .35)
+    .from(".hero-sub", { y: 30, opacity: 0, duration: 1.1 }, .9)
+    .from(".hero-ctas .btn", { y: 30, opacity: 0, duration: 1, stagger: .1 }, 1.05)
+    .from(".hero-side .glass", { x: 60, opacity: 0, duration: 1.2, stagger: .15 }, 1.1)
+    .from(".hero-flags", { y: -60, opacity: 0, duration: 1.6 }, .5)
+    .from("header.site .nav > *", { y: -30, opacity: 0, duration: 1, stagger: .08 }, .6);
+}
+function initMotion(){
+  if (!hasGsap || reduce) return;
+  gsap.registerPlugin(ScrollTrigger);
+
+  if (window.Lenis){
+    lenis = new Lenis({ lerp: .09, smoothWheel: true });
+    lenis.on("scroll", e => { ScrollTrigger.update(); onScroll(e.scroll); });
+    gsap.ticker.add(t => lenis.raf(t * 1000)); gsap.ticker.lagSmoothing(0);
+    document.documentElement.classList.add("lenis");
+  }
+
+  // Hero parallax + fade
+  gsap.to("#heroMedia", { yPercent: 18, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
+  gsap.to(".hero-inner", { yPercent: -25, opacity: 0, ease: "none", scrollTrigger: { trigger: ".hero", start: "40% top", end: "bottom top", scrub: true } });
+
+  // Marquee reacting to scroll velocity
+  const mq = gsap.to("#marquee", { xPercent: -33.333, repeat: -1, duration: 28, ease: "none" });
+  ScrollTrigger.create({ onUpdate: s => { const v = s.getVelocity(); gsap.to(mq, { timeScale: gsap.utils.clamp(-4, 4, v / 250) || 1, duration: .3, overwrite: true, onComplete: () => gsap.to(mq, { timeScale: s.direction < 0 ? -1 : 1, duration: 1 }) }); } });
+
+  // Generic reveals
+  $$(".reveal").forEach(el => gsap.from(el, { y: 50, opacity: 0, duration: 1.2, ease: "expo.out", scrollTrigger: { trigger: el, start: "top 88%" } }));
+
+  // Word scrub statement
+  setupStatement();
+
+  // Parallax images with data-speed
+  $$("[data-speed]").forEach(img => gsap.fromTo(img, { yPercent: -+img.dataset.speed }, { yPercent: +img.dataset.speed, ease: "none", scrollTrigger: { trigger: img.parentElement, start: "top bottom", end: "bottom top", scrub: true } }));
+
+  // Intro photo clip reveal
+  gsap.from(".ph-a", { clipPath: "inset(100% 0 0 0 round 20px)", duration: 1.6, ease: "expo.inOut", scrollTrigger: { trigger: ".intro-photos", start: "top 75%" } });
+  gsap.from(".ph-b", { clipPath: "inset(0 0 0 100% round 20px)", duration: 1.6, delay: .25, ease: "expo.inOut", scrollTrigger: { trigger: ".intro-photos", start: "top 75%" } });
+  gsap.from(".stamp", { scale: 0, rotate: -120, duration: 1.4, delay: .8, ease: "back.out(1.6)", scrollTrigger: { trigger: ".intro-photos", start: "top 75%" } });
+
+  // Impact rings + counters
+  $$(".stat").forEach((s, i) => {
+    const ring = $(".fg", s), num = $(".num", s), end = +num.dataset.count, suf = num.dataset.suffix || "";
+    const o = { v: 0 };
+    ScrollTrigger.create({ trigger: s, start: "top 85%", once: true, onEnter: () => {
+      gsap.to(ring, { strokeDashoffset: 440 * (1 - +ring.dataset.p), duration: 2, delay: i * .12, ease: "power3.out" });
+      gsap.to(o, { v: end, duration: 2, delay: i * .12, ease: "power3.out", onUpdate: () => num.textContent = Math.round(o.v) + suf });
+    } });
+  });
+
+  // Horizontal projects (desktop)
+  const mm = gsap.matchMedia();
+  mm.add("(min-width: 761px)", () => {
+    const track = $("#hTrack");
+    const dist = () => Math.max(0, track.scrollWidth - innerWidth);
+    const tween = gsap.to(track, { x: () => -dist(), ease: "none", scrollTrigger: { trigger: "#hWrap", start: "top 12%", end: () => "+=" + dist(), pin: true, scrub: 1, invalidateOnRefresh: true, anticipatePin: 1 } });
+    $$(".pcard", track).forEach(card => {
+      gsap.from($(".pcard-img img", card), { scale: 1.3, ease: "none", scrollTrigger: { trigger: card, containerAnimation: tween, start: "left right", end: "center center", scrub: true } });
+      const bar = $(".pbar i", card); if (bar) ScrollTrigger.create({ trigger: card, containerAnimation: tween, start: "left 80%", once: true, onEnter: () => gsap.to(bar, { width: bar.dataset.w + "%", duration: 1.6, ease: "power3.out" }) });
+    });
+  });
+  mm.add("(max-width: 760px)", () => {
+    $$(".pcard").forEach(card => {
+      gsap.from(card, { y: 60, opacity: 0, duration: 1, ease: "expo.out", scrollTrigger: { trigger: card, start: "top 88%" } });
+      const bar = $(".pbar i", card); if (bar) ScrollTrigger.create({ trigger: card, start: "top 75%", once: true, onEnter: () => gsap.to(bar, { width: bar.dataset.w + "%", duration: 1.6, ease: "power3.out" }) });
+    });
+  });
+
+  // Band text
+  gsap.from(".band-text p", { y: 80, opacity: 0, duration: 1.4, ease: "expo.out", scrollTrigger: { trigger: ".band", start: "top 65%" } });
+
+  // Story image mask
+  gsap.fromTo("#storyImg", { clipPath: "inset(12% 12% 12% 12% round 28px)" }, { clipPath: "inset(0% 0% 0% 0% round 28px)", ease: "none", scrollTrigger: { trigger: "#storyImg", start: "top 90%", end: "center 55%", scrub: true } });
+
+  // Timeline draw
+  gsap.to("#tFill", { scaleY: 1, ease: "none", scrollTrigger: { trigger: "#timeline", start: "top 70%", end: "bottom 60%", scrub: true } });
+  $$(".t-item").forEach(it => {
+    gsap.from($(".t-card", it), { x: it.matches(":nth-child(odd)") && innerWidth > 760 ? 80 : 40, opacity: 0, duration: 1.2, ease: "expo.out", scrollTrigger: { trigger: it, start: "top 82%" } });
+    gsap.from($(".t-year", it), { y: 40, opacity: 0, duration: 1.2, ease: "expo.out", scrollTrigger: { trigger: it, start: "top 82%" } });
+    gsap.from($(".t-dot", it), { scale: 0, duration: .8, ease: "back.out(3)", scrollTrigger: { trigger: it, start: "top 70%" } });
+  });
+
+  // Gallery stagger
+  ScrollTrigger.batch(".g-item", { start: "top 90%", onEnter: b => gsap.from(b, { y: 70, opacity: 0, clipPath: "inset(20% 0 0 0 round 16px)", duration: 1.2, stagger: .1, ease: "expo.out" }) });
+
+  // Gift cards
+  gsap.from(".gift", { y: 80, opacity: 0, duration: 1.2, stagger: .12, ease: "expo.out", scrollTrigger: { trigger: ".gifts", start: "top 85%" } });
+
+  // Footer big text
+  gsap.from(".foot-big span", { yPercent: 60, opacity: 0, duration: 1.4, ease: "expo.out", scrollTrigger: { trigger: "footer.site", start: "top 85%" } });
+
+  addEventListener("load", () => ScrollTrigger.refresh());
+}
+
+/* Preloader */
+function runLoader(done){
+  const L = $("#loader");
+  if (!hasGsap || reduce){ L && L.remove(); document.body.classList.remove("loading"); done(); return; }
+  const path = $("#ridgePath"), len = path.getTotalLength(), cnt = { v: 0 };
+  gsap.set(path, { strokeDasharray: len, strokeDashoffset: len });
+  gsap.timeline({ onComplete: () => { L.remove(); document.body.classList.remove("loading"); ScrollTrigger.refresh(); } })
+    .to(path, { strokeDashoffset: 0, duration: 1.3, ease: "power2.inOut" }, 0)
+    .from(".loader-name span", { yPercent: 110, duration: .9, stagger: .1, ease: "expo.out" }, .2)
+    .to(cnt, { v: 100, duration: 1.4, ease: "power2.inOut", onUpdate: () => $("#lcount").textContent = Math.round(cnt.v) }, 0)
+    .to(".loader-inner", { y: -40, opacity: 0, duration: .6, ease: "power2.in" }, 1.55)
+    .to(L, { yPercent: -100, duration: 1.1, ease: "expo.inOut" }, 1.8)
+    .add(done, 1.95);
+}
+
+/* Boot */
+applyLang("it", true);
+selectTab("t-eu");
+if (!hasGsap || reduce) $$(".pbar i").forEach(b => b.style.width = b.dataset.w + "%");
+if (!hasGsap || reduce) $$(".ring .fg").forEach(r => r.style.strokeDashoffset = 440 * (1 - +r.dataset.p)), $$(".num").forEach(n => n.textContent = n.dataset.count + (n.dataset.suffix || ""));
+if (!hasGsap || reduce) $("#tFill").style.transform = "translateX(-50%) scaleY(1)";
+initMotion();
+runLoader(heroIntro);
+$$(".lang button").forEach(b => b.addEventListener("click", () => applyLang(b.dataset.lang)));
+</script>
+</body>
+</html>
